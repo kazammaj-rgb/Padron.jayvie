@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Project preview coming soon</title>
+  <desc id="desc">Futuristic placeholder image for projects that do not have screenshots yet.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+    <linearGradient id="line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f5ff" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)" />
+  <g opacity="0.2">
+    <path d="M0 170h1600M0 450h1600M0 730h1600M220 0v900M800 0v900M1380 0v900" stroke="#38bdf8" stroke-width="2" />
+  </g>
+  <circle cx="1260" cy="170" r="180" fill="#00f5ff" opacity="0.12" />
+  <circle cx="350" cy="730" r="240" fill="#ec4899" opacity="0.08" />
+  <g transform="translate(280 185)">
+    <rect x="0" y="0" width="1040" height="530" rx="32" fill="#081121" stroke="url(#line)" stroke-width="4" />
+    <rect x="40" y="40" width="960" height="450" rx="24" fill="#0f172a" />
+    <path d="M90 405l180-155 160 120 180-210 120 135 120-85 160 195" fill="none" stroke="url(#line)" stroke-linecap="round" stroke-linejoin="round" stroke-width="18" filter="url(#glow)" />
+    <circle cx="260" cy="190" r="26" fill="#00f5ff" opacity="0.9" />
+    <circle cx="1110" cy="100" r="10" fill="#00f5ff" />
+    <circle cx="1150" cy="100" r="10" fill="#a855f7" />
+    <circle cx="1190" cy="100" r="10" fill="#ec4899" />
+  </g>
+  <g fill="#e2e8f0" text-anchor="middle">
+    <text x="800" y="790" font-family="Segoe UI, Arial, sans-serif" font-size="56" font-weight="700" letter-spacing="8">PROJECT PREVIEW</text>
+    <text x="800" y="850" font-family="Consolas, monospace" font-size="28" letter-spacing="6" fill="#67e8f9">COMING SOON</text>
+  </g>
+</svg>

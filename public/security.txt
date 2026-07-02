@@ -1,0 +1,4 @@
+Contact: mailto:kazammaj@gmail.com
+Preferred-Languages: en
+
+# Security reports welcome. Please report vulnerabilities responsibly.
