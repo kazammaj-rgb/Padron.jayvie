@@ -196,59 +196,11 @@ export const leadershipMentorship = {
 
 export const projects = [
   {
-    id: "rcvn-network",
-    title: "RCVN Network Channel",
+    id: "pirccar",
+    title: "Pirccar",
     category: "websites" as const,
-    description:
-      "A polished entertainment website showcasing channel highlights, media content, and a modern digital presence.",
-    tech: ["Next.js", "Tailwind CSS", "TypeScript", "Vercel"],
-    image: "/projects/rcvn-network.svg",
-    liveUrl: "https://rcv-nnetworkchannel.vercel.app/",
-    sourceUrl: "#",
-  },
-  {
-    id: "portfolio",
-    title: "Futuristic Portfolio",
-    category: "websites" as const,
-    description:
-      "Premium AI-inspired personal portfolio with cinematic animations and glassmorphism UI.",
-    tech: ["Next.js", "Tailwind", "Framer Motion", "GSAP", "Three.js"],
-    image: "/projects/coming-soon.svg",
-    liveUrl: "#",
-    sourceUrl: "#",
-  },
-  {
-    id: "music-app",
-    title: "Harmony Studio",
-    category: "apps" as const,
-    description:
-      "Music production companion app concept for musicians and directors.",
-    tech: ["React Native", "Firebase", "TypeScript"],
-    image: "/projects/coming-soon.svg",
-    liveUrl: "#",
-    sourceUrl: "#",
-  },
-  {
-    id: "campus-hub",
-    title: "Campus Connect",
-    category: "websites" as const,
-    description:
-      "University community platform for IT students — events, resources, and collaboration.",
-    tech: ["React", "Node.js", "MongoDB"],
-    image: "/projects/coming-soon.svg",
-    liveUrl: "#",
-    sourceUrl: "#",
-  },
-  {
-    id: "task-flow",
-    title: "TaskFlow AI",
-    category: "apps" as const,
-    description:
-      "Smart task manager with AI-assisted prioritization and futuristic dashboard UI.",
-    tech: ["Next.js", "OpenAI API", "Prisma"],
-    image: "/projects/coming-soon.svg",
-    liveUrl: "#",
-    sourceUrl: "#",
+    description: "Visit my deployed project.",
+    liveUrl: "https://pirccar-a9456.web.app/",
   },
 ];
 
