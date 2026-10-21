@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { GraduationCap, School } from "lucide-react";
 import Image from "next/image";
+import { ImageViewer } from "@/components/ui/ImageViewer";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -63,20 +64,6 @@ function EducationCard({
         className="education-card group relative mb-8 flex-1 overflow-hidden rounded-2xl border border-white/10 bg-[var(--glass-bg)] p-5 shadow-glass backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/30 hover:shadow-neon md:p-6"
         whileHover={{ y: -4, scale: 1.01 }}
       >
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-          <div className="relative size-full">
-            <Image
-              src={item.image}
-              alt=""
-              fill
-              className="object-cover opacity-30 transition-transform duration-500 group-hover:scale-105"
-              sizes="(min-width: 768px) 720px, 100vw"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-950/70 via-slate-950/55 to-slate-900/65" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.18),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.16),transparent_30%)]" />
-        </div>
-
         <div className="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-start">
           <div className="mx-auto flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/25 bg-slate-950/50 backdrop-blur-sm sm:mx-0">
             <School className="h-6 w-6 text-cyan-300" />
@@ -107,6 +94,21 @@ function EducationCard({
               Batch: {item.batch}
             </p>
           </div>
+
+          <ImageViewer
+            src={item.image}
+            alt={`${item.school} photo`}
+            className="relative mx-auto block h-24 w-32 shrink-0 cursor-zoom-in overflow-hidden rounded-xl border border-[var(--glass-border)] bg-[var(--bg-secondary)] sm:mx-0"
+          >
+            <Image
+              src={item.image}
+              alt={`${item.school} photo`}
+              fill
+              sizes="128px"
+              className="object-cover"
+            />
+            <span className="absolute inset-x-0 bottom-0 bg-black/70 px-2 py-1 text-xs text-white">View photo</span>
+          </ImageViewer>
         </div>
       </motion.article>
     </motion.li>
@@ -130,7 +132,7 @@ export function Education() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: false, amount: 0.15, margin: "-80px" }}
           transition={{ duration: 0.7 }}
           className="text-center"
         >
@@ -150,7 +152,7 @@ export function Education() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-40px" }}
+          viewport={{ once: false, amount: 0.12, margin: "-40px" }}
         >
           {education.map((item, index) => (
             <EducationCard
@@ -165,7 +167,7 @@ export function Education() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ delay: 0.3 }}
           className="mt-4 flex justify-center"
         >

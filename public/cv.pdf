@@ -1,15 +1,228 @@
 %PDF-1.4
-1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj
-2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj
-3 0 obj<</Type/Page/MediaBox[0 0 612 792]/Parent 2 0 R/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>endobj
-4 0 obj<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>endobj
-5 0 obj<</Length 44>>stream
-BT /F1 24 Tf 72 700 Td (Jayvie Padron - CV Placeholder) Tj ET
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 100 0 R /F2 101 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 3676 >>
+stream
+0.970 0.950 0.910 rg 0 0 612 792 re f
+0.160 0.150 0.130 rg 0 642 612 150 re f
+0.780 0.390 0.270 rg 0 642 8 150 re f
+0.990 0.980 0.960 rg BT /F2 25 Tf 1 0 0 1 48.0 746.0 Tm (JAYVIE GULAN PADRON) Tj ET
+0.910 0.670 0.550 rg BT /F2 10 Tf 1 0 0 1 50.0 722.0 Tm (FULL-STACK & MOBILE APPLICATION DEVELOPER) Tj ET
+0.910 0.880 0.830 rg BT /F1 8.5 Tf 1 0 0 1 50.0 704.0 Tm (BS INFORMATION TECHNOLOGY STUDENT | ISABELA STATE UNIVERSITY) Tj ET
+0.990 0.980 0.960 rg BT /F1 8.2 Tf 1 0 0 1 50.0 680.0 Tm (09670560650  |  kazammaj@gmail.com  |  Cauayan City, Isabela, Philippines) Tj ET
+0.990 0.980 0.960 rg BT /F1 8 Tf 1 0 0 1 50.0 663.0 Tm (Threads: @itsnot_pjay  |  Instagram: @jayvie.padron  |  X: @Jayvvvvvvvv) Tj ET
+0.780 0.390 0.270 rg BT /F2 10 Tf 1 0 0 1 48.0 613.0 Tm (PROFESSIONAL PROFILE) Tj ET
+0.780 0.390 0.270 rg 48 605 32 2 re f
+0.910 0.860 0.790 rg 84 605.5 480 1 re f
+0.160 0.150 0.130 rg BT /F1 8.5 Tf 1 0 0 1 48.0 589.0 Tm (Full-stack and mobile application developer focused on modern, responsive, user-friendly websites and) Tj ET
+0.160 0.150 0.130 rg BT /F1 8.5 Tf 1 0 0 1 48.0 577.5 Tm (mobile applications. An Information Technology student who values practical problem-solving, continuous) Tj ET
+0.160 0.150 0.130 rg BT /F1 8.5 Tf 1 0 0 1 48.0 566.0 Tm (learning, and delivering polished digital experiences.) Tj ET
+0.780 0.390 0.270 rg BT /F2 10 Tf 1 0 0 1 48.0 546.5 Tm (TECHNICAL SKILLS) Tj ET
+0.780 0.390 0.270 rg 48 538.5 32 2 re f
+0.910 0.860 0.790 rg 84 539.0 480 1 re f
+0.160 0.150 0.130 rg BT /F1 8.2 Tf 1 0 0 1 48.0 522.5 Tm (Frontend: HTML, CSS, JavaScript, React, Next.js, Tailwind CSS, TypeScript) Tj ET
+0.160 0.150 0.130 rg BT /F1 8.2 Tf 1 0 0 1 48.0 512.0 Tm (Backend: PHP, Laravel, Node.js | Mobile: Kotlin, XML | Other tools and technologies: Vercel, Firebase,) Tj ET
+0.160 0.150 0.130 rg BT /F1 8.2 Tf 1 0 0 1 48.0 501.5 Tm (MongoDB, Prisma, React Native, OpenAI API) Tj ET
+0.780 0.390 0.270 rg BT /F2 10 Tf 1 0 0 1 48.0 483.0 Tm (EXPERIENCE) Tj ET
+0.780 0.390 0.270 rg 48 475.0 32 2 re f
+0.910 0.860 0.790 rg 84 475.5 480 1 re f
+0.160 0.150 0.130 rg BT /F2 9 Tf 1 0 0 1 48.0 459.0 Tm (Assistant Principal | Turod Integrated School) Tj ET
+0.430 0.410 0.380 rg BT /F1 8 Tf 1 0 0 1 48.0 447.0 Tm (Work Immersion) Tj ET
+0.160 0.150 0.130 rg BT /F1 8.2 Tf 1 0 0 1 48.0 435.0 Tm (Supported school administration, coordinated activities, and gained leadership experience in an) Tj ET
+0.160 0.150 0.130 rg BT /F1 8.2 Tf 1 0 0 1 48.0 424.5 Tm (educational environment.) Tj ET
+0.780 0.390 0.270 rg BT /F2 10 Tf 1 0 0 1 48.0 406.0 Tm (EDUCATION) Tj ET
+0.780 0.390 0.270 rg 48 398.0 32 2 re f
+0.910 0.860 0.790 rg 84 398.5 480 1 re f
+0.160 0.150 0.130 rg BT /F2 8.5 Tf 1 0 0 1 48.0 382.0 Tm (Bachelor of Science in Information Technology) Tj ET
+0.430 0.410 0.380 rg BT /F1 7.8 Tf 1 0 0 1 48.0 371.0 Tm (Isabela State University - Cauayan Campus | 2024 - Present) Tj ET
+0.160 0.150 0.130 rg BT /F2 8.5 Tf 1 0 0 1 48.0 356.0 Tm (Bachelor of Theology) Tj ET
+0.430 0.410 0.380 rg BT /F1 7.8 Tf 1 0 0 1 48.0 345.0 Tm (Far East Bible Institute | 2022 - 2023) Tj ET
+0.160 0.150 0.130 rg BT /F2 8.5 Tf 1 0 0 1 48.0 330.0 Tm (Information Communication Technology) Tj ET
+0.430 0.410 0.380 rg BT /F1 7.8 Tf 1 0 0 1 48.0 319.0 Tm (East Asia International System College Inc. | 2019 - 2020) Tj ET
+0.160 0.150 0.130 rg BT /F2 8.5 Tf 1 0 0 1 48.0 304.0 Tm (Junior High School) Tj ET
+0.430 0.410 0.380 rg BT /F1 7.8 Tf 1 0 0 1 48.0 293.0 Tm (Turod Integrated School | 2017 - 2018) Tj ET
+0.160 0.150 0.130 rg BT /F2 8.5 Tf 1 0 0 1 48.0 278.0 Tm (Elementary Education) Tj ET
+0.430 0.410 0.380 rg BT /F1 7.8 Tf 1 0 0 1 48.0 267.0 Tm (Turod Integrated School | 2012 - 2013) Tj ET
 endstream
 endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 100 0 R /F2 101 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 4791 >>
+stream
+0.970 0.950 0.910 rg 0 0 612 792 re f
+0.160 0.150 0.130 rg 0 752 612 40 re f
+0.780 0.390 0.270 rg 0 752 6 40 re f
+0.990 0.980 0.960 rg BT /F2 11 Tf 1 0 0 1 48.0 766.0 Tm (JAYVIE GULAN PADRON) Tj ET
+0.910 0.670 0.550 rg BT /F2 8 Tf 1 0 0 1 442.0 766.0 Tm (CURRICULUM VITAE) Tj ET
+0.780 0.390 0.270 rg BT /F2 10 Tf 1 0 0 1 48.0 723.0 Tm (SELECTED PROJECTS) Tj ET
+0.780 0.390 0.270 rg 48 715 32 2 re f
+0.910 0.860 0.790 rg 84 715.5 480 1 re f
+0.160 0.150 0.130 rg BT /F2 8.5 Tf 1 0 0 1 48.0 699.0 Tm (RCVN Network Channel | Live website) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 48.0 687.0 Tm (Entertainment website for channel highlights and media content. Stack: Next.js, Tailwind CSS, TypeScript,) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 48.0 677.2 Tm (Vercel.) Tj ET
+0.160 0.150 0.130 rg BT /F2 8.5 Tf 1 0 0 1 48.0 663.4 Tm (Futuristic Portfolio | Portfolio project) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 48.0 651.4 Tm (Personal portfolio with animated interface. Stack listed in portfolio: Next.js, Tailwind, Framer Motion, GSAP,) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 48.0 641.6 Tm (Three.js.) Tj ET
+0.160 0.150 0.130 rg BT /F2 8.5 Tf 1 0 0 1 48.0 627.8 Tm (Harmony Studio | App concept) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 48.0 615.8 Tm (Music production companion concept for musicians and directors. Stack: React Native, Firebase, TypeScript.) Tj ET
+0.160 0.150 0.130 rg BT /F2 8.5 Tf 1 0 0 1 48.0 602.0 Tm (Campus Connect | Website concept) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 48.0 590.0 Tm (University community platform concept for events, resources, and collaboration. Stack: React, Node.js, MongoDB.) Tj ET
+0.160 0.150 0.130 rg BT /F2 8.5 Tf 1 0 0 1 48.0 576.2 Tm (TaskFlow AI | App concept) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 48.0 564.2 Tm (Task manager concept with AI-assisted prioritization. Stack: Next.js, OpenAI API, Prisma.) Tj ET
+0.780 0.390 0.270 rg BT /F2 10 Tf 1 0 0 1 48.0 545.4 Tm (STRENGTHS) Tj ET
+0.780 0.390 0.270 rg 48 537.4000000000003 32 2 re f
+0.910 0.860 0.790 rg 84 537.9000000000003 480 1 re f
+0.780 0.390 0.270 rg BT /F2 7.9 Tf 1 0 0 1 51.0 521.4 Tm (-) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 62.0 521.4 Tm (AI-assisted productivity: Uses AI tools to accelerate development and improve productivity.) Tj ET
+0.780 0.390 0.270 rg BT /F2 7.9 Tf 1 0 0 1 51.0 511.6 Tm (-) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 62.0 511.6 Tm (Performs well under pressure: Maintains focus in fast-paced and challenging situations.) Tj ET
+0.780 0.390 0.270 rg BT /F2 7.9 Tf 1 0 0 1 51.0 501.8 Tm (-) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 62.0 501.8 Tm (Resilient: Handles responsibilities professionally with a stable, positive mindset.) Tj ET
+0.780 0.390 0.270 rg BT /F2 7.9 Tf 1 0 0 1 51.0 492.0 Tm (-) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 62.0 492.0 Tm (Purpose-driven and deadline-oriented: Values continuous learning, time management, and completing work) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 62.0 482.2 Tm (before deadlines.) Tj ET
+0.780 0.390 0.270 rg BT /F2 10 Tf 1 0 0 1 48.0 465.4 Tm (LEADERSHIP & MENTORSHIP) Tj ET
+0.780 0.390 0.270 rg 48 457.40000000000026 32 2 re f
+0.910 0.860 0.790 rg 84 457.90000000000026 480 1 re f
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 48.0 441.4 Tm (Experienced in guiding others toward personal and professional growth, encouraging teamwork, and helping) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 48.0 431.6 Tm (people build on their strengths.) Tj ET
+0.780 0.390 0.270 rg BT /F2 7.8 Tf 1 0 0 1 51.0 421.8 Tm (-) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.8 Tf 1 0 0 1 62.0 421.8 Tm (Effective communication: communicates ideas clearly and listens actively.) Tj ET
+0.780 0.390 0.270 rg BT /F2 7.8 Tf 1 0 0 1 51.0 412.3 Tm (-) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.8 Tf 1 0 0 1 62.0 412.3 Tm (Team building: supports collaboration, accountability, and mutual growth.) Tj ET
+0.780 0.390 0.270 rg BT /F2 7.8 Tf 1 0 0 1 51.0 402.8 Tm (-) Tj ET
+0.160 0.150 0.130 rg BT /F1 7.8 Tf 1 0 0 1 62.0 402.8 Tm (Coaching and mentoring: helps others develop skills and confidence.) Tj ET
+0.780 0.390 0.270 rg BT /F2 10 Tf 1 0 0 1 48.0 386.3 Tm (ADDITIONAL INFORMATION) Tj ET
+0.780 0.390 0.270 rg 48 378.30000000000024 32 2 re f
+0.910 0.860 0.790 rg 84 378.80000000000024 480 1 re f
+0.160 0.150 0.130 rg BT /F1 7.9 Tf 1 0 0 1 48.0 362.3 Tm (Languages: English, Tagalog, Ilocano | Citizenship: Filipino | Interests: singing, music, and music direction) Tj ET
+0.430 0.410 0.380 rg BT /F1 7.6 Tf 1 0 0 1 48.0 352.5 Tm (Portfolio and contact: https://www.threads.com/@itsnot_pjay | Instagram: jayvie.padron | X: Jayvvvvvvvv |) Tj ET
+0.430 0.410 0.380 rg BT /F1 7.6 Tf 1 0 0 1 48.0 343.1 Tm (Email: kazammaj@gmail.com) Tj ET
+endstream
+endobj
+100 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+101 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
 xref
-0 6
-trailer<</Size 6/Root 1 0 R>>
+0 102
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000127 00000 n 
+0000000267 00000 n 
+0000003995 00000 n 
+0000004135 00000 n 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000000000 00000 f 
+0000008978 00000 n 
+0000009077 00000 n 
+trailer
+<< /Size 102 /Root 1 0 R >>
 startxref
-0
+9181
 %%EOF

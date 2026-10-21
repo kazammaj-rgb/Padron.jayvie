@@ -9,6 +9,7 @@ interface MagneticButtonProps {
   className?: string;
   onClick?: () => void;
   href?: string;
+  download?: string;
   variant?: "primary" | "outline";
   type?: "button" | "submit";
   disabled?: boolean;
@@ -19,6 +20,7 @@ export function MagneticButton({
   className,
   onClick,
   href,
+  download,
   variant = "primary",
   type = "button",
   disabled,
@@ -77,7 +79,12 @@ export function MagneticButton({
 
   if (href) {
     return (
-      <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">
+      <a
+        href={href}
+        download={download}
+        target={download ? undefined : href.startsWith("http") ? "_blank" : undefined}
+        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+      >
         {content}
       </a>
     );

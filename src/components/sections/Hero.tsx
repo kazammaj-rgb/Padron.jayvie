@@ -107,7 +107,11 @@ export function Hero() {
           </div>
 
           <motion.div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-            <MagneticButton href="/cv.pdf" variant="primary">
+            <MagneticButton
+              href="/cv.pdf"
+              download="Jayvie-Gulan-Padron-CV.pdf"
+              variant="primary"
+            >
               <Download className="h-4 w-4" />
               Download CV
             </MagneticButton>
@@ -144,7 +148,7 @@ export function Hero() {
         transition={{ duration: 2, repeat: Infinity }}
         aria-label="Scroll down"
       >
-        <span className="text-xs font-mono tracking-widest">SCROLL</span>
+        <span className="text-xs font-mono tracking-widest">EXPLORE</span>
         <ChevronDown className="h-6 w-6" />
       </motion.button>
     </section>

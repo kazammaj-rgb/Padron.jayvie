@@ -4,7 +4,6 @@ import { contactInfo } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
-  Crosshair,
   ExternalLink,
   MapPin,
   Minus,
@@ -32,8 +31,8 @@ export function PremiumLocationMap() {
       mapRef.current?.flyTo({
         center: [mapConfig.lng, mapConfig.lat],
         zoom: mapConfig.zoom,
-        pitch: mapConfig.pitch,
-        bearing: mapConfig.bearing,
+        pitch: 0,
+        bearing: 0,
         duration,
         essential: true,
       });
@@ -49,8 +48,8 @@ export function PremiumLocationMap() {
       style: DARK_STYLE,
       center: [mapConfig.lng, mapConfig.lat],
       zoom: mapConfig.zoom - 0.8,
-      pitch: 42,
-      bearing: mapConfig.bearing,
+      pitch: 0,
+      bearing: 0,
       attributionControl: false,
     });
 
@@ -73,8 +72,8 @@ export function PremiumLocationMap() {
       map.flyTo({
         center: [mapConfig.lng, mapConfig.lat],
         zoom: mapConfig.zoom,
-        pitch: mapConfig.pitch,
-        bearing: mapConfig.bearing,
+        pitch: 0,
+        bearing: 0,
         duration: 2200,
         essential: true,
       });
@@ -101,13 +100,6 @@ export function PremiumLocationMap() {
       duration: 450,
       essential: true,
     });
-  };
-
-  const tiltCycle = () => {
-    const map = mapRef.current;
-    if (!map) return;
-    const nextPitch = map.getPitch() > 20 ? 0 : mapConfig.pitch;
-    map.easeTo({ pitch: nextPitch, duration: 700 });
   };
 
   return (
@@ -178,7 +170,6 @@ export function PremiumLocationMap() {
           { icon: Plus, label: "Zoom in", action: () => adjustZoom(0.85) },
           { icon: Minus, label: "Zoom out", action: () => adjustZoom(-0.85) },
           { icon: RotateCcw, label: "Reset view", action: () => flyHome() },
-          { icon: Crosshair, label: "Toggle 3D tilt", action: tiltCycle },
         ].map(({ icon: Icon, label, action }) => (
           <motion.button
             key={label}

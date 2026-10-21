@@ -5,9 +5,10 @@ import { SectionReveal } from "@/components/ui/SectionReveal";
 import { projects } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Code2, ExternalLink, Folder, Play, Smartphone, Globe } from "lucide-react";
+import { Code2, ExternalLink, Folder, Smartphone, Globe, Eye } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { ImageViewer } from "@/components/ui/ImageViewer";
 
 type Filter = "all" | "apps" | "websites";
 
@@ -54,7 +55,7 @@ export function Projects() {
                 className={cn(
                   "inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium transition-all duration-300",
                   filter === f.id
-                    ? "bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-900 shadow-neon"
+                    ? "bg-[#d97757] text-[#211914] shadow-none"
                     : "glass-panel hover:border-cyan-400/30"
                 )}
               >
@@ -74,35 +75,31 @@ export function Projects() {
               <motion.article
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9, rotateY: -10 }}
-                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="group perspective-1000"
+                className="group"
               >
-                <div className="glass-panel-strong preserve-3d overflow-hidden transition-all duration-500 hover:shadow-neon-lg">
-                  <div className="relative aspect-video overflow-hidden bg-slate-800">
-                    <Image
+                <div className="glass-panel-strong overflow-hidden transition-all duration-500 hover:shadow-neon-lg">
+                  <div className="relative aspect-video overflow-hidden bg-[var(--bg-secondary)]">
+                    <ImageViewer
                       src={project.image}
                       alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = "none";
-                      }}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
-                      <Code2 className="h-16 w-16 text-cyan-400/30" />
-                    </div>
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <button
-                        className="flex h-14 w-14 items-center justify-center rounded-full bg-white/20 backdrop-blur-md transition-transform hover:scale-110"
-                        aria-label="Play preview"
-                      >
-                        <Play className="h-6 w-6 fill-white text-white" />
-                      </button>
-                    </div>
-                    <span className="absolute left-4 top-4 rounded-full bg-black/50 px-3 py-1 text-xs font-mono capitalize text-cyan-400 backdrop-blur-md">
+                      className="absolute inset-0 z-10 block h-full w-full cursor-zoom-in"
+                    >
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                      />
+                      <span className="absolute bottom-3 right-3 flex items-center gap-2 rounded-lg bg-[#211f1c] px-3 py-2 text-sm text-white">
+                        <Eye className="h-4 w-4" /> View image
+                      </span>
+                    </ImageViewer>
+                    <span className="absolute left-4 top-4 z-20 rounded-full bg-[#211f1c] px-3 py-1 text-xs font-mono capitalize text-[#e1a184]">
                       {project.category}
                     </span>
                   </div>

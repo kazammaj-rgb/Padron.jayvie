@@ -6,10 +6,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function scrollToSection(id: string) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(
+    new CustomEvent("portfolio:navigate", { detail: { id } })
+  );
 }
 
 /** ISO date string e.g. "2002-04-05" — age increases automatically after each birthday. */

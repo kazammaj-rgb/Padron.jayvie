@@ -1,18 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const LoadingScene3D = dynamic(
-  () =>
-    import("@/components/effects/LoadingScene3D").then((m) => m.LoadingScene3D),
-  { ssr: false }
-);
-
 const LOAD_STEPS = [
   "Booting neural interface...",
-  "Loading 3D environment...",
+  "Loading portfolio environment...",
   "Compositing glass UI layers...",
   "Syncing portfolio modules...",
   "Calibrating motion engine...",
@@ -85,14 +78,13 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
       />
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.6, rotateX: 25 }}
-        animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-20 flex flex-col items-center px-4"
-        style={{ transformPerspective: 1200 }}
       >
         <div className="loader-hex-ring absolute -inset-20 md:-inset-28" />
-        <LoadingScene3D />
+        <div className="loader-hex-core" aria-hidden="true" />
 
         <p className="mt-4 font-display text-xl font-bold tracking-[0.12em] md:text-2xl">
           <span className="holographic-text">JAYVIE PADRON</span>

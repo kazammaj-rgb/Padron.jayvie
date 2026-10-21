@@ -102,7 +102,7 @@ export function PersonalData() {
                         key={item.label}
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: false, amount: 0.2 }}
                         transition={{ delay: i * 0.05 }}
                         className="group border-b border-white/5 pb-4 last:border-0"
                       >
@@ -139,7 +139,7 @@ export function PersonalData() {
                   key={item.year}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.15 }}
                   transition={{ delay: i * 0.1 }}
                   className="relative flex items-start gap-4 pb-8 md:flex-col md:items-center md:pb-0 md:text-center"
                 >

@@ -16,23 +16,26 @@ export function AnimatedCounter({
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   useEffect(() => {
-    if (!isInView) return;
-    let start = 0;
+    if (!isInView) {
+      setCount(0);
+      return;
+    }
     const startTime = performance.now();
+    let frame = 0;
 
     const tick = (now: number) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      start = Math.floor(eased * end);
-      setCount(start);
-      if (progress < 1) requestAnimationFrame(tick);
+      setCount(Math.floor(eased * end));
+      if (progress < 1) frame = requestAnimationFrame(tick);
     };
 
-    requestAnimationFrame(tick);
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
   }, [isInView, end, duration]);
 
   return (

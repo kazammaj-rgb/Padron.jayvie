@@ -31,9 +31,9 @@ export const socialLinks = [
     icon: "twitter",
   },
   {
-    name: "Telegram",
-    url: "https://t.me/Pjayyyyyyyyy",
-    icon: "telegram",
+    name: "Threads",
+    url: "https://www.threads.com/@itsnot_pjay",
+    icon: "threads",
   },
 ] as const;
 
@@ -283,9 +283,9 @@ export const contactInfo = {
       url: "https://x.com/Jayvvvvvvvv",
     },
     {
-      platform: "Telegram",
-      handle: "Pjayyyyyyyyy",
-      url: "https://t.me/Pjayyyyyyyyy",
+      platform: "Threads",
+      handle: "itsnot_pjay",
+      url: "https://www.threads.com/@itsnot_pjay",
     },
   ],
 };

@@ -26,12 +26,10 @@ export function GsapScrollProvider({ children }: { children: React.ReactNode }) 
             scrollTrigger: {
               trigger: section,
               start: "top 78%",
-              toggleActions: "play none none none",
+              toggleActions: "play reverse play reverse",
             },
             y: 80,
             opacity: 0,
-            rotateX: 18,
-            transformPerspective: 1200,
             duration: 1.1,
             ease: "power4.out",
           });
@@ -42,7 +40,7 @@ export function GsapScrollProvider({ children }: { children: React.ReactNode }) 
             scrollTrigger: {
               trigger: section,
               start: "top 75%",
-              toggleActions: "play none none none",
+              toggleActions: "play reverse play reverse",
             },
             y: 40,
             opacity: 0,
@@ -57,12 +55,10 @@ export function GsapScrollProvider({ children }: { children: React.ReactNode }) 
             scrollTrigger: {
               trigger: section,
               start: "top 70%",
-              toggleActions: "play none none none",
+              toggleActions: "play reverse play reverse",
             },
             y: 60,
             opacity: 0,
-            rotateY: (i) => (i % 2 === 0 ? -8 : 8),
-            transformPerspective: 1000,
             stagger: 0.12,
             duration: 0.9,
             ease: "power3.out",
@@ -119,18 +115,6 @@ export function GsapScrollProvider({ children }: { children: React.ReactNode }) 
         });
       });
 
-      gsap.utils.toArray<HTMLElement>(".tilt-on-scroll").forEach((el) => {
-        gsap.to(el, {
-          rotateX: 5,
-          rotateY: -5,
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            end: "top 30%",
-            scrub: true,
-          },
-        });
-      });
     });
 
     return () => ctx.revert();

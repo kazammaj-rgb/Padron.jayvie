@@ -1,13 +1,5 @@
 "use client";
 
-import { AuroraBackground } from "@/components/effects/AuroraBackground";
-import { CursorGlow } from "@/components/effects/CursorGlow";
-import { FloatingGradients } from "@/components/effects/FloatingGradients";
-import { GridPerspective } from "@/components/effects/GridPerspective";
-import { ParticleField } from "@/components/effects/ParticleField";
-import dynamic from "next/dynamic";
-import { Footer } from "@/components/Footer";
-import { GsapScrollProvider } from "@/components/GsapScrollProvider";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { Navbar } from "@/components/Navbar";
 import { Contact } from "@/components/sections/Contact";
@@ -17,72 +9,62 @@ import { Hero } from "@/components/sections/Hero";
 import { PersonalData } from "@/components/sections/PersonalData";
 import { SkillsStrengths } from "@/components/sections/SkillsStrengths";
 import { Projects } from "@/components/sections/Projects";
-import { CinematicOverlay } from "@/components/effects/CinematicOverlay";
-import { LightBeams } from "@/components/effects/LightBeams";
 import { PageEntrance } from "@/components/PageEntrance";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { SectionDivider } from "@/components/ui/SectionDivider";
 import { usePortfolioMusic } from "@/hooks/usePortfolioMusic";
 import { useEffect, useState } from "react";
 
-const ThreeBackground = dynamic(
-  () =>
-    import("@/components/effects/ThreeBackground").then((m) => m.ThreeBackground),
-  { ssr: false }
-);
-
 export function PortfolioApp() {
   const [loading, setLoading] = useState(true);
+  const [activeSection, setActiveSection] = useState("home");
   const { musicPlaying, toggleMusic } = usePortfolioMusic(!loading);
 
   useEffect(() => {
-    document.body.style.overflow = loading ? "hidden" : "";
+    const handleNavigation = (event: Event) => {
+      const id = (event as CustomEvent<{ id?: string }>).detail?.id;
+      if (id) setActiveSection(id);
+    };
+    window.addEventListener("portfolio:navigate", handleNavigation);
+    return () => window.removeEventListener("portfolio:navigate", handleNavigation);
+  }, []);
+
+  useEffect(() => {
+    const stage = document.querySelector<HTMLElement>(".portfolio-stage");
+    if (stage) stage.scrollTop = 0;
+  }, [activeSection]);
+
+  useEffect(() => {
+    document.documentElement.classList.add("fixed-portfolio");
+    document.body.style.overflow = "hidden";
     return () => {
+      document.documentElement.classList.remove("fixed-portfolio");
       document.body.style.overflow = "";
     };
-  }, [loading]);
+  }, []);
 
   return (
     <>
       {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
 
-      <GsapScrollProvider>
-        {/* Layered cinematic background */}
-        <div className="mesh-bg parallax-bg fixed inset-0 -z-20" aria-hidden />
-        <AuroraBackground />
-        <FloatingGradients />
-        <GridPerspective />
-        <ThreeBackground />
-        <ParticleField />
-        <LightBeams />
-        <CinematicOverlay />
-        <div className="noise-overlay fixed inset-0 -z-10 opacity-[0.03]" aria-hidden />
+      <Navbar
+        activeSection={activeSection}
+        onNavigate={setActiveSection}
+        musicPlaying={musicPlaying}
+        onToggleMusic={toggleMusic}
+      />
 
-        <ScrollProgress />
-        <CursorGlow />
-
-        <Navbar musicPlaying={musicPlaying} onToggleMusic={toggleMusic} />
-
-        <PageEntrance>
+      <div className="portfolio-stage">
+        <PageEntrance key={activeSection}>
           <main className="relative z-10">
-            <Hero />
-            <SectionDivider />
-            <PersonalData />
-            <SectionDivider flip />
-            <Education />
-            <SectionDivider />
-            <Experience />
-            <SectionDivider flip />
-            <SkillsStrengths />
-            <SectionDivider />
-            <Projects />
-            <SectionDivider flip />
-            <Contact />
+            {activeSection === "home" && <Hero />}
+            {activeSection === "personal" && <PersonalData />}
+            {activeSection === "education" && <Education />}
+            {activeSection === "experience" && <Experience />}
+            {activeSection === "skills" && <SkillsStrengths />}
+            {activeSection === "projects" && <Projects />}
+            {activeSection === "contact" && <Contact />}
           </main>
-
-          <Footer />
         </PageEntrance>
-      </GsapScrollProvider>
+      </div>
     </>
   );
 }
