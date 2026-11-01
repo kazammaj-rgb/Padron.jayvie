@@ -44,7 +44,7 @@ export function SkillsStrengths() {
             <div className="mx-auto max-w-7xl">
                 <SectionReveal>
                     <div className="text-center">
-                        <span className="font-mono text-sm uppercase tracking-[0.3em] text-cyan-400">
+                        <span className="font-mono text-sm uppercase tracking-[0.3em] text-accent">
                             04 — Skills & Strengths
                         </span>
                         <h2 className="section-title mt-4">
@@ -62,11 +62,9 @@ export function SkillsStrengths() {
                             whileHover={{ y: -4 }}
                             className="glass-panel-strong relative overflow-hidden p-6 md:p-8"
                         >
-                            <div className="absolute -right-24 -top-24 h-56 w-56 rounded-full bg-cyan-400/10 blur-3xl" />
-                            <div className="absolute -bottom-24 -left-24 h-56 w-56 rounded-full bg-purple-500/10 blur-3xl" />
 
                             <div className="relative z-10">
-                                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/5 px-4 py-2 text-xs font-mono uppercase tracking-[0.2em] text-cyan-300">
+                                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/5 px-4 py-2 text-xs font-mono uppercase tracking-[0.2em] text-accent">
                                     <Rocket className="h-4 w-4" />
                                     Full-Stack + Mobile Focus
                                 </div>
@@ -84,17 +82,17 @@ export function SkillsStrengths() {
                                         return (
                                             <motion.article
                                                 key={category.title}
-                                                whileHover={{ y: -3, scale: 1.01 }}
+                                                whileHover={{ y: -2 }}
                                                 className={cn(
-                                                    "rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:border-cyan-400/30",
-                                                    index === 0 && "bg-gradient-to-br from-cyan-400/10 to-transparent",
-                                                    index === 1 && "bg-gradient-to-br from-purple-500/10 to-transparent",
-                                                    index === 2 && "bg-gradient-to-br from-pink-500/10 to-transparent"
+                                                    "rounded-2xl border border-[var(--glass-border)] bg-[var(--surface-soft)] p-5 transition-all duration-300 hover:border-accent/30",
+                                                    index === 0 && "bg-gradient-to-br from-accent/10 to-transparent",
+                                                    index === 1 && "bg-gradient-to-br from-accent/10 to-transparent",
+                                                    index === 2 && "bg-gradient-to-br from-accent/10 to-transparent"
                                                 )}
                                             >
                                                 <div className="mb-4 flex items-center gap-3">
-                                                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-950/50 ring-1 ring-white/10">
-                                                        <Icon className="h-5 w-5 text-cyan-300" />
+                                                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--icon-bg)] ring-1 ring-[var(--glass-border)]">
+                                                        <Icon className="h-5 w-5 text-accent" />
                                                     </div>
                                                     <div>
                                                         <h4 className="font-display text-base font-semibold">
@@ -110,9 +108,9 @@ export function SkillsStrengths() {
                                                     {category.skills.map((skill) => (
                                                         <span
                                                             key={skill}
-                                                            className="inline-flex items-center gap-1 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1.5 text-xs font-medium text-[var(--text-primary)]"
+                                                            className="inline-flex items-center gap-1 rounded-full border border-accent/20 bg-accent/5 px-3 py-1.5 text-xs font-medium text-[var(--text-primary)]"
                                                         >
-                                                            <BadgeCheck className="h-3.5 w-3.5 text-cyan-300" />
+                                                            <BadgeCheck className="h-3.5 w-3.5 text-accent" />
                                                             {skill}
                                                         </span>
                                                     ))}
@@ -130,9 +128,9 @@ export function SkillsStrengths() {
                                     ].map((item) => (
                                         <span
                                             key={item}
-                                            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2"
+                                            className="inline-flex items-center gap-2 rounded-full border border-[var(--glass-border)] bg-[var(--surface-soft)] px-4 py-2"
                                         >
-                                            <Sparkles className="h-4 w-4 text-purple-300" />
+                                            <Sparkles className="h-4 w-4 text-accent" />
                                             {item}
                                         </span>
                                     ))}
@@ -147,8 +145,8 @@ export function SkillsStrengths() {
                             className="glass-panel-strong p-6 md:p-8"
                         >
                             <div className="mb-6 flex items-center gap-3">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500/20 to-cyan-400/10 ring-1 ring-white/10">
-                                    <ShieldCheck className="h-6 w-6 text-purple-300" />
+                                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/10 ring-1 ring-[var(--glass-border)]">
+                                    <ShieldCheck className="h-6 w-6 text-accent" />
                                 </div>
                                 <div>
                                     <h3 className="font-display text-2xl font-bold">
@@ -167,12 +165,12 @@ export function SkillsStrengths() {
                                     return (
                                         <motion.article
                                             key={strength.title}
-                                            whileHover={{ x: 4 }}
-                                            className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:border-purple-400/30 hover:bg-purple-400/5"
+                                            whileHover={{ y: -2 }}
+                                            className="group rounded-2xl border border-[var(--glass-border)] bg-[var(--surface-soft)] p-5 transition-all duration-300 hover:border-accent/30 hover:bg-accent/5"
                                         >
                                             <div className="flex items-start gap-4">
-                                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-950/50 ring-1 ring-white/10 group-hover:ring-purple-400/30">
-                                                    <Icon className="h-5 w-5 text-cyan-300 group-hover:text-purple-300" />
+                                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--icon-bg)] ring-1 ring-[var(--glass-border)] group-hover:ring-accent/30">
+                                                    <Icon className="h-5 w-5 text-accent group-hover:text-accent" />
                                                 </div>
                                                 <div>
                                                     <h4 className="font-display text-base font-semibold text-[var(--text-primary)]">
@@ -196,8 +194,8 @@ export function SkillsStrengths() {
                             className="glass-panel-strong p-6 md:p-8"
                         >
                             <div className="mb-6 flex items-center gap-3">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400/20 to-purple-500/10 ring-1 ring-white/10">
-                                    <Users className="h-6 w-6 text-cyan-300" />
+                                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/10 ring-1 ring-[var(--glass-border)]">
+                                    <Users className="h-6 w-6 text-accent" />
                                 </div>
                                 <div>
                                     <h3 className="font-display text-2xl font-bold">
@@ -216,12 +214,12 @@ export function SkillsStrengths() {
                                     return (
                                         <motion.article
                                             key={item.title}
-                                            whileHover={{ x: 4 }}
-                                            className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:border-cyan-400/30 hover:bg-cyan-400/5"
+                                            whileHover={{ y: -2 }}
+                                            className="group rounded-2xl border border-[var(--glass-border)] bg-[var(--surface-soft)] p-5 transition-all duration-300 hover:border-accent/30 hover:bg-accent/5"
                                         >
                                             <div className="flex items-start gap-4">
-                                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-950/50 ring-1 ring-white/10 group-hover:ring-cyan-400/30">
-                                                    <Icon className="h-5 w-5 text-cyan-300 group-hover:text-cyan-200" />
+                                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--icon-bg)] ring-1 ring-[var(--glass-border)] group-hover:ring-accent/30">
+                                                    <Icon className="h-5 w-5 text-accent group-hover:text-accent" />
                                                 </div>
                                                 <div>
                                                     <h4 className="font-display text-base font-semibold text-[var(--text-primary)]">

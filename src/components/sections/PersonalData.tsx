@@ -18,17 +18,17 @@ const baseCardConfig = [
   {
     title: "Identity",
     icon: User,
-    gradient: "from-cyan-500/20 to-blue-500/10",
+    gradient: "from-accent/20 to-accent/10",
   },
   {
     title: "Location",
     icon: MapPin,
-    gradient: "from-purple-500/20 to-pink-500/10",
+    gradient: "from-accent/20 to-accent/10",
   },
   {
     title: "Personal",
     icon: Heart,
-    gradient: "from-pink-500/20 to-orange-500/10",
+    gradient: "from-accent/20 to-accent/10",
   },
 ] as const;
 
@@ -53,7 +53,7 @@ export function PersonalData() {
       <div className="mx-auto max-w-7xl">
         <SectionReveal>
           <div className="text-center">
-            <span className="font-mono text-sm uppercase tracking-[0.3em] text-cyan-400">
+            <span className="font-mono text-sm uppercase tracking-[0.3em] text-accent">
               01 — Personal Data
             </span>
             <h2 className="section-title mt-4">
@@ -86,12 +86,12 @@ export function PersonalData() {
             <SectionReveal key={card.title} delay={cardIndex * 0.15}>
               <TiltCard>
                 <motion.div
-                  whileHover={{ boxShadow: "0 0 40px rgba(0,245,255,0.15)" }}
+                  data-reveal="" whileHover={{ y: -2 }}
                   className={`glass-panel-strong overflow-hidden bg-gradient-to-br ${card.gradient} p-6 md:p-8`}
                 >
                   <div className="mb-6 flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-400/10 ring-1 ring-cyan-400/30">
-                      <card.icon className="h-6 w-6 text-cyan-400" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 ring-1 ring-accent/30">
+                      <card.icon className="h-6 w-6 text-accent" />
                     </div>
                     <h3 className="font-display text-xl font-bold">{card.title}</h3>
                   </div>
@@ -99,14 +99,14 @@ export function PersonalData() {
                   <ul className="space-y-4">
                     {card.data.map((item, i) => (
                       <motion.li
-                        key={item.label}
+                        data-reveal="" key={item.label}
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: false, amount: 0.2 }}
+                        viewport={{ once: true, amount: 0.2 }}
                         transition={{ delay: i * 0.05 }}
-                        className="group border-b border-white/5 pb-4 last:border-0"
+                        className="group border-b border-[var(--glass-border)] pb-4 last:border-0"
                       >
-                        <span className="text-xs font-mono uppercase tracking-wider text-cyan-400/80">
+                        <span className="text-xs font-mono uppercase tracking-wider text-accent/80">
                           {item.label}
                         </span>
                         <p className="mt-1 text-sm font-medium text-[var(--text-primary)] md:text-base">
@@ -124,11 +124,11 @@ export function PersonalData() {
         <SectionReveal delay={0.3}>
           <div className="mt-16 glass-panel p-8">
             <h3 className="mb-8 flex items-center gap-2 font-display text-xl font-bold">
-              <Cake className="h-5 w-5 text-purple-400" />
+              <Cake className="h-5 w-5 text-accent" />
               Timeline Flow
             </h3>
             <div className="relative flex flex-col gap-0 md:flex-row md:justify-between">
-              <div className="absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-cyan-400 via-purple-500 to-pink-500 md:left-0 md:top-1/2 md:block md:h-px md:w-full md:-translate-y-1/2" />
+              <div className="absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-accent via-accent to-accent md:left-0 md:top-1/2 md:block md:h-px md:w-full md:-translate-y-1/2" />
               {[
                 { year: "2002", event: "Born — April 5" },
                 { year: "2013", event: "Elementary Graduate" },
@@ -136,18 +136,18 @@ export function PersonalData() {
                 { year: "Now", event: "Building the future" },
               ].map((item, i) => (
                 <motion.div
-                  key={item.year}
+                  data-reveal="" key={item.year}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.15 }}
+                  viewport={{ once: true, amount: 0.15 }}
                   transition={{ delay: i * 0.1 }}
                   className="relative flex items-start gap-4 pb-8 md:flex-col md:items-center md:pb-0 md:text-center"
                 >
-                  <div className="z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-xs font-bold text-slate-900">
+                  <div className="z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-accent to-accent text-xs font-bold text-[var(--text-primary)]">
                     {i + 1}
                   </div>
                   <div>
-                    <span className="font-mono text-cyan-400">{item.year}</span>
+                    <span className="font-mono text-accent">{item.year}</span>
                     <p className="text-sm text-[var(--text-muted)]">{item.event}</p>
                   </div>
                 </motion.div>
@@ -161,9 +161,9 @@ export function PersonalData() {
             {["Singer", "Musician", "Music Director"].map((talent) => (
               <span
                 key={talent}
-                className="inline-flex items-center gap-2 rounded-full border border-purple-400/30 bg-purple-400/5 px-5 py-2 text-sm font-medium"
+                className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-5 py-2 text-sm font-medium"
               >
-                <Globe className="h-4 w-4 text-purple-400" />
+                <Globe className="h-4 w-4 text-accent" />
                 {talent}
               </span>
             ))}

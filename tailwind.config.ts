@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        accent: "rgb(var(--accent-rgb) / <alpha-value>)",
         neon: {
           cyan: "#00f5ff",
           purple: "#a855f7",

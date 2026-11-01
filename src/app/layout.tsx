@@ -30,7 +30,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark smooth-ui scroll-smooth" suppressHydrationWarning>
-      <body className="font-body antialiased">{children}</body>
+      <body className="font-body antialiased">
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');document.documentElement.classList.toggle('light',t==='light');document.documentElement.classList.toggle('dark',t!=='light')}catch(e){}})()` }} />
+        {children}
+      </body>
     </html>
   );
 }

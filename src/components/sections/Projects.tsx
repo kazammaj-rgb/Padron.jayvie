@@ -15,7 +15,7 @@ export function Projects() {
       <div className="mx-auto max-w-7xl">
         <SectionReveal>
           <div className="text-center">
-            <span className="font-mono text-sm uppercase tracking-[0.3em] text-cyan-400">
+            <span className="font-mono text-sm uppercase tracking-[0.3em] text-accent">
               05 — Projects
             </span>
             <h2 className="section-title mt-4">
@@ -28,13 +28,13 @@ export function Projects() {
         </SectionReveal>
 
         <motion.div
-          layout
+          data-reveal="" layout
           className="mx-auto mt-12 grid w-full max-w-3xl gap-8"
         >
           <AnimatePresence mode="popLayout">
             {projects.map((project, index) => (
               <motion.article
-                key={project.id}
+                data-reveal="" key={project.id}
                 layout
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -50,10 +50,10 @@ export function Projects() {
                     className="relative flex aspect-video flex-col items-center justify-center gap-4 overflow-hidden bg-[var(--bg-secondary)] text-center transition-colors hover:bg-[var(--bg-secondary)]/80"
                     aria-label={`Visit ${project.title}`}
                   >
-                    <span className="absolute left-4 top-4 rounded-full bg-[#211f1c] px-3 py-1 text-xs font-mono capitalize text-[#e1a184]">
+                    <span className="absolute left-4 top-4 rounded-full border border-[var(--glass-border)] bg-[var(--surface-soft)] px-3 py-1 text-xs font-mono capitalize text-[var(--accent)]">
                       {project.category}
                     </span>
-                    <span className="flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10 text-cyan-300">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-2xl border border-accent/30 bg-accent/10 text-accent">
                       <Globe className="h-8 w-8" />
                     </span>
                     <span className="font-mono text-sm tracking-wide text-[var(--text-muted)]">
@@ -62,7 +62,7 @@ export function Projects() {
                   </a>
 
                   <div className="p-6">
-                    <h3 className="font-display text-xl font-bold group-hover:text-cyan-400 transition-colors">
+                    <h3 className="font-display text-xl font-bold group-hover:text-accent transition-colors">
                       {project.title}
                     </h3>
                     <p className="mt-2 text-sm text-[var(--text-muted)] line-clamp-2">

@@ -6,16 +6,15 @@ const MUSIC_SRC = "/portfolioMusic.mp3";
 const MUSIC_VOLUME = 0.35;
 const MUTE_PREF_KEY = "portfolio-music-muted";
 
-export function usePortfolioMusic(readyToPlay: boolean) {
+export function usePortfolioMusic() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [musicPlaying, setMusicPlaying] = useState(false);
-  const [, setAutoplayBlocked] = useState(false);
 
   useEffect(() => {
     const audio = new Audio(MUSIC_SRC);
     audio.loop = true;
     audio.volume = MUSIC_VOLUME;
-    audio.preload = "auto";
+    audio.preload = "none";
     audioRef.current = audio;
 
     return () => {
@@ -32,11 +31,9 @@ export function usePortfolioMusic(readyToPlay: boolean) {
     try {
       await audio.play();
       setMusicPlaying(true);
-      setAutoplayBlocked(false);
       return true;
     } catch {
       setMusicPlaying(false);
-      setAutoplayBlocked(true);
       return false;
     }
   }, []);
@@ -46,31 +43,16 @@ export function usePortfolioMusic(readyToPlay: boolean) {
     setMusicPlaying(false);
   }, []);
 
-  useEffect(() => {
-    if (!readyToPlay) return;
-
-    const userMuted =
-      typeof window !== "undefined" &&
-      sessionStorage.getItem(MUTE_PREF_KEY) === "true";
-
-    if (userMuted) {
-      pauseMusic();
-      return;
-    }
-
-    void playMusic();
-  }, [readyToPlay, playMusic, pauseMusic]);
-
   const toggleMusic = useCallback(async () => {
     if (musicPlaying) {
       pauseMusic();
-      sessionStorage.setItem(MUTE_PREF_KEY, "true");
+      try { sessionStorage.setItem(MUTE_PREF_KEY, "true"); } catch { /* Playback still works without storage. */ }
       return;
     }
 
     const started = await playMusic();
     if (started) {
-      sessionStorage.setItem(MUTE_PREF_KEY, "false");
+      try { sessionStorage.setItem(MUTE_PREF_KEY, "false"); } catch { /* Playback still works without storage. */ }
     }
   }, [musicPlaying, playMusic, pauseMusic]);
 

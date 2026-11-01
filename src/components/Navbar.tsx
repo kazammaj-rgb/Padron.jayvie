@@ -2,7 +2,7 @@
 
 import { SocialLinksBar } from "@/components/ui/SocialLinksBar";
 import { navLinks } from "@/lib/data";
-import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import { useTheme } from "@/hooks/useTheme";
 import { BriefcaseBusiness, FolderKanban, GraduationCap, Home, Mail, Moon, Sun, UserRound, Volume2, VolumeX, Wrench } from "lucide-react";
 
@@ -31,10 +31,10 @@ export function Navbar({ activeSection, onNavigate, musicPlaying, onToggleMusic 
       <button
         type="button"
         onClick={() => onNavigate("home")}
-        className="mb-8 flex items-center justify-center gap-3 rounded-xl p-2 text-left hover:bg-white/5 lg:justify-start"
+        className="sidebar-brand mb-8 flex items-center justify-center gap-3 rounded-xl p-2 text-left hover:bg-white/5 lg:justify-start"
         aria-label="Go to home"
       >
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#d97757] font-display text-lg font-bold text-[#211914]">JP</span>
+        <span className="brand-monogram flex shrink-0 items-center justify-center font-display text-lg font-bold">JP</span>
         <span className="hidden text-sm font-semibold text-[var(--text-primary)] lg:block">Jayvie Padron<span className="mt-1 block text-xs font-normal text-[var(--text-muted)]">Portfolio</span></span>
       </button>
 
@@ -51,11 +51,10 @@ export function Navbar({ activeSection, onNavigate, musicPlaying, onToggleMusic 
                   onClick={() => onNavigate(id)}
                   aria-current={active ? "page" : undefined}
                   title={label}
-                  className={cn(
-                    "flex w-full items-center justify-center gap-3 rounded-xl px-3 py-3 text-sm transition-colors lg:justify-start",
-                    active ? "bg-[#d97757]/15 text-[#d97757]" : "text-[var(--text-muted)] hover:bg-white/5 hover:text-[var(--text-primary)]"
-                  )}
+                  aria-label={label}
+                  className="sidebar-nav-button flex w-full items-center gap-3 px-3 py-3 text-sm"
                 >
+                  {active && <motion.span layoutId="active-section" className="nav-active-surface" transition={{ type: "spring", stiffness: 400, damping: 35 }} aria-hidden="true" />}
                   <Icon className="h-5 w-5 shrink-0" />
                   <span className="hidden lg:block">{label}</span>
                 </button>
@@ -66,18 +65,19 @@ export function Navbar({ activeSection, onNavigate, musicPlaying, onToggleMusic 
       </nav>
 
       <div className="mb-4 hidden border-t border-[var(--glass-border)] pt-4 lg:block">
-        <SocialLinksBar size="sm" />
+        <SocialLinksBar size="sm" className="sidebar-social" />
         <p className="mt-3 text-xs leading-relaxed text-[var(--text-muted)]">
           “Maybe you&apos;re not the best, but at least you&apos;re not the worst either.”
         </p>
         <p className="mt-2 text-[10px] text-[var(--text-muted)]">Jesus loves you · Portfolio v2.0</p>
       </div>
-      <div className="flex flex-col items-center gap-2 border-t border-[var(--glass-border)] pt-4 lg:flex-row">
+      <div className="sidebar-utilities flex flex-col items-center gap-2 border-t border-[var(--glass-border)] pt-4 lg:flex-row">
         <button
           type="button"
           onClick={onToggleMusic}
           className="flex h-10 w-10 items-center justify-center rounded-xl text-[var(--text-muted)] hover:bg-white/5 hover:text-[var(--text-primary)]"
           aria-label={musicPlaying ? "Turn music off" : "Turn music on"}
+          aria-pressed={musicPlaying}
           title={musicPlaying ? "Mute portfolio music" : "Play portfolio music"}
         >
           {musicPlaying ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
@@ -88,6 +88,7 @@ export function Navbar({ activeSection, onNavigate, musicPlaying, onToggleMusic 
             onClick={toggleTheme}
             className="flex h-10 w-10 items-center justify-center rounded-xl text-[var(--text-muted)] hover:bg-white/5 hover:text-[var(--text-primary)]"
             aria-label="Toggle theme"
+            aria-pressed={theme === "light"}
             title="Toggle theme"
           >
             {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}

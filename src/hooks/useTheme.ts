@@ -8,9 +8,9 @@ export function useTheme() {
 
   useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem("theme") as "dark" | "light" | null;
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initial = stored ?? (prefersDark ? "dark" : "light");
+    let stored: string | null = null;
+    try { stored = localStorage.getItem("theme"); } catch { /* Storage can be unavailable in private contexts. */ }
+    const initial = stored === "light" ? "light" : "dark";
     setTheme(initial);
     document.documentElement.classList.toggle("light", initial === "light");
     document.documentElement.classList.toggle("dark", initial === "dark");
@@ -19,7 +19,7 @@ export function useTheme() {
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
     setTheme(next);
-    localStorage.setItem("theme", next);
+    try { localStorage.setItem("theme", next); } catch { /* The current session still supports theme switching. */ }
     document.documentElement.classList.toggle("light", next === "light");
     document.documentElement.classList.toggle("dark", next === "dark");
   };

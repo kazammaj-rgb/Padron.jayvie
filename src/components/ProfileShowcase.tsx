@@ -1,27 +1,35 @@
-﻿"use client";
+"use client";
 
 import { ProfileImage } from "@/components/ProfileImage";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { ImageViewer } from "@/components/ui/ImageViewer";
+import { Expand } from "lucide-react";
+import { type PointerEvent } from "react";
 
 export function ProfileShowcase() {
+  const reduced = useReducedMotion();
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useSpring(x, { stiffness: 180, damping: 25 });
+  const rotateY = useSpring(y, { stiffness: 180, damping: 25 });
+  const reset = () => { x.set(0); y.set(0); };
+  const tilt = (event: PointerEvent<HTMLDivElement>) => {
+    if (reduced || event.pointerType !== "mouse" || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    x.set(-((event.clientY - rect.top) / rect.height - .5) * 6);
+    y.set(((event.clientX - rect.left) / rect.width - .5) * 7);
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.92 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.85, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-      className="profile-showcase-wrap relative mx-auto flex items-center justify-center overflow-visible p-2"
-    >
-      <motion.div
-        className="profile-showcase-card relative z-10 w-[min(100%,18rem)] shrink-0 sm:w-80 lg:w-[22rem]"
-      >
-        <ImageViewer
-          src="/img/jvprofile.png"
-          alt="Jayvie Padron"
-          className="profile-showcase-inner relative block aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl border bg-[var(--bg-secondary)] p-3 sm:p-4"
-        >
+    <motion.div initial={reduced ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: .6, delay: reduced ? 0 : .16, ease: [.22, 1, .36, 1] }}
+      className="profile-showcase-wrap">
+      <motion.div className="profile-showcase-card" style={reduced ? undefined : { rotateX, rotateY }}
+        onPointerMove={tilt} onPointerLeave={reset} onPointerCancel={reset}>
+        <ImageViewer src="/img/jvprofile.png" alt="Jayvie Padron" className="profile-showcase-inner">
           <ProfileImage className="object-contain object-center" />
-          <span className="absolute bottom-3 right-3 rounded-lg bg-[#211f1c] px-3 py-2 text-sm text-white">View photo</span>
+          <span className="profile-frame-light" aria-hidden="true" />
+          <span className="profile-photo-label"><Expand className="h-3.5 w-3.5" />View photo</span>
         </ImageViewer>
       </motion.div>
     </motion.div>

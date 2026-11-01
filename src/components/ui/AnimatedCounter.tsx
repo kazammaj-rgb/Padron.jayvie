@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 
 interface AnimatedCounterProps {
   end: number;
@@ -12,13 +12,15 @@ interface AnimatedCounterProps {
 export function AnimatedCounter({
   end,
   suffix = "",
-  duration = 2000,
+  duration = 700,
 }: AnimatedCounterProps) {
+  const reduced = useReducedMotion();
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   useEffect(() => {
+    if (reduced) { setCount(end); return; }
     if (!isInView) {
       setCount(0);
       return;
@@ -36,12 +38,12 @@ export function AnimatedCounter({
 
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [isInView, end, duration]);
+  }, [isInView, end, duration, reduced]);
 
   return (
     <span ref={ref} className="font-mono text-3xl font-bold neon-text md:text-4xl">
-      {count}
-      {suffix}
+      <span aria-hidden="true">{reduced ? end : count}{suffix}</span>
+      <span className="sr-only">{end}{suffix}</span>
     </span>
   );
 }

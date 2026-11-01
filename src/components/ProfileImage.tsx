@@ -15,6 +15,7 @@ export function ProfileImage({ className }: { className?: string }) {
       alt="Jayvie Padron"
       fill
       className={className}
+      sizes="(max-width: 767px) 280px, (max-width: 1199px) 30vw, 410px"
       priority
       onError={() => setSrc(FALLBACK)}
     />

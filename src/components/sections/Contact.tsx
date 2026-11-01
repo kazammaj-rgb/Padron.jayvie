@@ -13,7 +13,7 @@ import {
   Send,
 } from "lucide-react";
 import dynamic from "next/dynamic";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 const PremiumLocationMap = dynamic(
   () =>
@@ -21,8 +21,8 @@ const PremiumLocationMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-[min(420px,55vh)] min-h-[280px] items-center justify-center rounded-2xl border border-cyan-400/20 bg-slate-950 md:h-[420px]">
-        <span className="font-mono text-xs uppercase tracking-widest text-cyan-400/80">
+      <div className="flex h-[min(420px,55vh)] min-h-[280px] items-center justify-center rounded-2xl border border-accent/20 bg-[var(--bg-secondary)] md:h-[420px]">
+        <span className="font-mono text-xs uppercase tracking-widest text-accent/80">
           Loading mapâ€¦
         </span>
       </div>
@@ -31,6 +31,8 @@ const PremiumLocationMap = dynamic(
 );
 
 export function Contact() {
+  const sentTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => { if (sentTimer.current) clearTimeout(sentTimer.current); }, []);
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -66,7 +68,7 @@ export function Contact() {
 
       setSent(true);
       setForm({ name: "", email: "", message: "", _gotcha: "" });
-      setTimeout(() => setSent(false), 5000);
+      sentTimer.current = setTimeout(() => setSent(false), 5000);
     } catch {
       setError("Network error. Check your connection and try again.");
     } finally {
@@ -82,7 +84,7 @@ export function Contact() {
       <div className="mx-auto max-w-7xl">
         <SectionReveal>
           <div className="text-center">
-            <span className="font-mono text-sm uppercase tracking-[0.3em] text-cyan-400">
+            <span className="font-mono text-sm uppercase tracking-[0.3em] text-accent">
               06 Contact
             </span>
             <h2 className="section-title mt-4">
@@ -98,8 +100,8 @@ export function Contact() {
           <SectionReveal>
             <div className="glass-panel-strong p-6 md:p-8">
               <div className="mb-6 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400/20 to-purple-500/20">
-                  <Bot className="h-6 w-6 text-cyan-400" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/20">
+                  <Bot className="h-6 w-6 text-accent" />
                 </div>
                 <div>
                   <h3 className="font-display text-lg font-bold">AI Contact Panel</h3>
@@ -140,7 +142,7 @@ export function Contact() {
                     />
                     <label
                       htmlFor={field.id}
-                      className="pointer-events-none absolute left-4 top-4 text-sm text-[var(--text-muted)] transition-all duration-300 peer-focus:top-2 peer-focus:text-xs peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-xs"
+                      className="pointer-events-none absolute left-4 top-4 text-sm text-[var(--text-muted)] transition-all duration-300 peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-xs"
                     >
                       {field.label}
                     </label>
@@ -161,7 +163,7 @@ export function Contact() {
                   />
                   <label
                     htmlFor="message"
-                    className="pointer-events-none absolute left-4 top-4 text-sm text-[var(--text-muted)] transition-all duration-300 peer-focus:top-2 peer-focus:text-xs peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-xs"
+                    className="pointer-events-none absolute left-4 top-4 text-sm text-[var(--text-muted)] transition-all duration-300 peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-xs"
                   >
                     Your Message
                   </label>
@@ -170,7 +172,7 @@ export function Contact() {
                 {error && (
                   <p
                     role="alert"
-                    className="rounded-xl border border-pink-500/30 bg-pink-500/10 px-4 py-3 text-sm text-pink-300"
+                    className="form-error rounded-xl border px-4 py-3 text-sm"
                   >
                     {error}
                   </p>
@@ -179,7 +181,7 @@ export function Contact() {
                 {sent && (
                   <p
                     role="status"
-                    className="rounded-xl border border-cyan-400/30 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-300"
+                    className="rounded-xl border border-accent/30 bg-accent/10 px-4 py-3 text-sm text-accent"
                   >
                     Message sent! I&apos;ll get a Gmail notification and reply soon.
                   </p>
@@ -248,11 +250,11 @@ export function Contact() {
                             : undefined,
                         }
                         : {})}
-                      whileHover={{ x: 4, boxShadow: "0 0 30px rgba(0,245,255,0.1)" }}
+                      whileHover={{ y: -2 }}
                       className="glass-panel flex items-start gap-4 p-5 transition-all"
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-cyan-400/10">
-                        <item.icon className="h-5 w-5 text-cyan-400" />
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10">
+                        <item.icon className="h-5 w-5 text-accent" />
                       </div>
                       <div>
                         <p className="text-xs font-mono text-[var(--text-muted)]">
@@ -281,12 +283,12 @@ export function Contact() {
                       href={s.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-3 rounded-xl border border-transparent p-3 transition-all hover:border-cyan-400/30 hover:bg-cyan-400/5"
+                      className="group flex items-center gap-3 rounded-xl border border-transparent p-3 transition-all hover:border-accent/30 hover:bg-accent/5"
                     >
-                      <span className="font-mono text-xs text-cyan-400">
+                      <span className="font-mono text-xs text-accent">
                         {s.platform}
                       </span>
-                      <span className="text-sm font-medium group-hover:text-cyan-400 transition-colors">
+                      <span className="text-sm font-medium group-hover:text-accent transition-colors">
                         @{s.handle}
                       </span>
                     </a>

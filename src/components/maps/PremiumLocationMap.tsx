@@ -16,13 +16,15 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const { map: mapConfig, mapUrl } = contactInfo;
 
-const DARK_STYLE =
-  "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json";
+const DARK_STYLE = "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json";
+const LIGHT_STYLE = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
+const getMapStyle = () => document.documentElement.classList.contains("light") ? LIGHT_STYLE : DARK_STYLE;
 
 export function PremiumLocationMap() {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const markerRef = useRef<maplibregl.Marker | null>(null);
+  const [unavailable, setUnavailable] = useState(false);
   const [ready, setReady] = useState(false);
   const [zoom, setZoom] = useState(mapConfig.zoom);
 
@@ -34,7 +36,7 @@ export function PremiumLocationMap() {
         pitch: 0,
         bearing: 0,
         duration,
-        essential: true,
+        essential: false,
       });
     },
     []
@@ -43,15 +45,32 @@ export function PremiumLocationMap() {
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
-    const map = new maplibregl.Map({
+    let map: maplibregl.Map;
+    try {
+      map = new maplibregl.Map({
       container: containerRef.current,
-      style: DARK_STYLE,
+      style: getMapStyle(),
       center: [mapConfig.lng, mapConfig.lat],
       zoom: mapConfig.zoom - 0.8,
       pitch: 0,
       bearing: 0,
       attributionControl: false,
+      });
+    } catch {
+      setUnavailable(true);
+      return;
+    }
+    // Keep the map consistent with the sidebar theme, without recreating it.
+    let currentStyle = getMapStyle();
+    const themeObserver = new MutationObserver(() => {
+      const nextStyle = getMapStyle();
+      if (nextStyle !== currentStyle) {
+        currentStyle = nextStyle;
+        map.setStyle(nextStyle);
+      }
     });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    map.on("error", () => { if (!map.loaded()) setUnavailable(true); });
 
     map.addControl(
       new maplibregl.AttributionControl({ compact: true }),
@@ -74,11 +93,12 @@ export function PremiumLocationMap() {
         zoom: mapConfig.zoom,
         pitch: 0,
         bearing: 0,
-        duration: 2200,
-        essential: true,
+        duration: 600,
+        essential: false,
       });
 
       setReady(true);
+      setUnavailable(false);
     });
 
     map.on("zoom", () => setZoom(Number(map.getZoom().toFixed(1))));
@@ -86,7 +106,9 @@ export function PremiumLocationMap() {
     mapRef.current = map;
 
     return () => {
+      themeObserver.disconnect();
       markerRef.current?.remove();
+      markerRef.current = null;
       map.remove();
       mapRef.current = null;
     };
@@ -98,24 +120,23 @@ export function PremiumLocationMap() {
     map.easeTo({
       zoom: map.getZoom() + delta,
       duration: 450,
-      essential: true,
+      essential: false,
     });
   };
 
   return (
-    <div className="premium-map group relative overflow-hidden rounded-2xl border border-cyan-400/20 bg-slate-950 shadow-[0_0_40px_rgba(0,245,255,0.08)]">
+    <div className="premium-map group relative overflow-hidden rounded-2xl border border-accent/20 bg-[var(--bg-secondary)] ">
       {/* HUD header */}
       <motion.div
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: ready ? 1 : 0, y: ready ? 0 : -8 }}
-        className="pointer-events-none absolute left-0 right-0 top-0 z-20 flex items-center justify-between gap-3 border-b border-cyan-400/15 bg-slate-950/85 px-4 py-3 backdrop-blur-md"
+        className="pointer-events-none absolute left-0 right-0 top-0 z-20 flex items-center justify-between gap-3 border-b border-accent/15 bg-[var(--bg-secondary)] px-4 py-3 backdrop-blur-md"
       >
         <motion.div className="flex items-center gap-2">
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-cyan-400/90">
+          <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent/90">
             Geo API Â· Live
           </span>
         </motion.div>
@@ -123,24 +144,6 @@ export function PremiumLocationMap() {
           ZOOM {zoom}
         </span>
       </motion.div>
-
-      {/* Scanline overlay */}
-      <div
-        className="pointer-events-none absolute inset-0 z-10 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,245,255,0.5) 2px, rgba(0,245,255,0.5) 4px)",
-        }}
-        aria-hidden
-      />
-
-      {/* Corner brackets */}
-      <div className="pointer-events-none absolute inset-3 z-10 border border-cyan-400/10" aria-hidden>
-        <span className="absolute left-0 top-0 h-4 w-4 border-l-2 border-t-2 border-cyan-400/50" />
-        <span className="absolute right-0 top-0 h-4 w-4 border-r-2 border-t-2 border-cyan-400/50" />
-        <span className="absolute bottom-0 left-0 h-4 w-4 border-b-2 border-l-2 border-purple-400/50" />
-        <span className="absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-purple-400/50" />
-      </div>
 
       <div
         ref={containerRef}
@@ -153,13 +156,13 @@ export function PremiumLocationMap() {
       />
 
       {!ready && (
-        <div className="absolute inset-0 z-[5] flex items-center justify-center bg-slate-950">
+        <div className="absolute inset-0 z-[5] flex items-center justify-center bg-[var(--bg-secondary)]">
           <motion.div
-            animate={{ opacity: [0.4, 1, 0.4] }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 1.2, repeat: Infinity }}
-            className="font-mono text-xs uppercase tracking-widest text-cyan-400"
+            className="font-mono text-xs uppercase tracking-widest text-accent"
           >
-            Initializing map engineâ€¦
+            {unavailable ? mapConfig.label : "Initializing map engineâ€¦"}
           </motion.div>
         </div>
       )}
@@ -178,9 +181,10 @@ export function PremiumLocationMap() {
               e.stopPropagation();
               action();
             }}
-            whileHover={{ scale: 1.08 }}
+            disabled={!ready}
+            whileHover={{ y: -1 }}
             whileTap={{ scale: 0.95 }}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/25 bg-slate-950/90 text-cyan-400 shadow-neon backdrop-blur-md transition-colors hover:border-cyan-400/50 hover:bg-cyan-400/10"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-accent/25 bg-[var(--bg-secondary)] text-accent transition-colors hover:border-accent/50 hover:bg-accent/10"
             aria-label={label}
           >
             <Icon className="h-4 w-4" />
@@ -194,27 +198,26 @@ export function PremiumLocationMap() {
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: ready ? 1 : 0, y: ready ? 0 : 8 }}
+        initial={false}
         transition={{ delay: 0.3 }}
-        whileHover={{ scale: 1.02 }}
-        className="absolute bottom-4 left-4 z-20 flex max-w-[calc(100%-5.5rem)] items-center gap-3 rounded-xl border border-purple-500/25 bg-slate-950/90 px-4 py-3 backdrop-blur-md transition-all hover:border-cyan-400/40 hover:shadow-neon"
+        whileHover={{ y: -1 }}
+        className="absolute bottom-4 left-4 z-20 flex max-w-[calc(100%-5.5rem)] items-center gap-3 rounded-xl border border-accent/25 bg-[var(--bg-secondary)] px-4 py-3 backdrop-blur-md transition-all hover:border-accent/40 hover:shadow-neon"
       >
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400/20 to-purple-500/20">
-          <MapPin className="h-4 w-4 text-cyan-400" />
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/20">
+          <MapPin className="h-4 w-4 text-accent" />
         </div>
         <div className="min-w-0 text-left">
           <p className="truncate text-sm font-semibold text-[var(--text-primary)]">
             {mapConfig.label}
           </p>
-          <p className="flex items-center gap-1 text-xs text-cyan-400/90">
+          <p className="flex items-center gap-1 text-xs text-accent/90">
             Open in Google Maps
             <ExternalLink className="h-3 w-3 shrink-0" />
           </p>
         </div>
       </motion.a>
 
-      <p className="pointer-events-none absolute bottom-1 right-20 z-20 font-mono text-[9px] text-slate-500">
+      <p className="pointer-events-none absolute bottom-1 right-20 z-20 font-mono text-[9px] text-[var(--text-muted)]">
         Click map Â· navigate
       </p>
     </div>
