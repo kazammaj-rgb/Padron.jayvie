@@ -194,13 +194,43 @@ export const leadershipMentorship = {
   ],
 } as const;
 
-export const projects = [
+type Project = {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+} & (
+  | { kind: "website"; liveUrl: string }
+  | { kind: "android"; downloadUrl: string; githubUrl: string; icon?: "document" }
+);
+
+export const projects: Project[] = [
   {
     id: "pirccar",
+    kind: "website",
     title: "Pirccar",
     category: "websites" as const,
     description: "Visit my deployed project.",
     liveUrl: "https://pirccar-a9456.web.app/",
+  },
+  {
+    id: "pjrccar",
+    kind: "android",
+    title: "pjRcCar",
+    category: "Android Application",
+    description: "An Android application for controlling an Arduino-based remote-control car.",
+    downloadUrl: "/api/download/pjrccar",
+    githubUrl: "https://github.com/kazammaj-rgb/Pj_RC-car.-mobileapk/blob/fc15e7f9e0f3e4f52f03420b4ef901042ac9a7d1/app-debug.apk",
+  },
+  {
+    id: "portfolio-cv",
+    kind: "android",
+    title: "padron.jayvie_CV APK",
+    category: "Android Application",
+    description: "My personal portfolio and CV application for Android.",
+    downloadUrl: "/api/download/portfolio-cv",
+    githubUrl: "https://github.com/kazammaj-rgb/padron.jayvie_CV-mobile-APK/blob/aa0e4c41db2074054d3967849b0c9481fffbd852/PadronJayvie-CV.apk",
+    icon: "document",
   },
 ];
 
