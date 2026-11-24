@@ -1,11 +1,13 @@
-﻿"use client";
+"use client";
+
+import { useReducedMotionPreference } from "@/hooks/useReducedMotionPreference";
 
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { contactInfo } from "@/lib/data";
 import { motion } from "framer-motion";
 import {
-  Bot,
+  ArrowUpRight,
   Loader2,
   Mail,
   MapPin,
@@ -23,7 +25,7 @@ const PremiumLocationMap = dynamic(
     loading: () => (
       <div className="flex h-[min(420px,55vh)] min-h-[280px] items-center justify-center rounded-2xl border border-accent/20 bg-[var(--bg-secondary)] md:h-[420px]">
         <span className="font-mono text-xs uppercase tracking-widest text-accent/80">
-          Loading mapâ€¦
+          Loading map…
         </span>
       </div>
     ),
@@ -31,6 +33,7 @@ const PremiumLocationMap = dynamic(
 );
 
 export function Contact() {
+  const reduced = useReducedMotionPreference();
   const sentTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => () => { if (sentTimer.current) clearTimeout(sentTimer.current); }, []);
   const [loading, setLoading] = useState(false);
@@ -79,34 +82,34 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="relative px-4 py-24 md:px-8 md:py-32"
+      className="editorial-section relative px-4 py-24 md:px-8 md:py-32"
     >
       <div className="mx-auto max-w-7xl">
         <SectionReveal>
-          <div className="text-center">
-            <span className="font-mono text-sm uppercase tracking-[0.3em] text-accent">
-              06 Contact
+          <div className="section-header">
+            <span className="section-kicker font-mono text-sm uppercase tracking-[0.3em] text-accent">
+              07 — Contact
             </span>
             <h2 className="section-title mt-4">
               Get In <span className="neon-text">Touch</span>
             </h2>
-            <p className="section-subtitle mx-auto">
-              Send a message it goes straight to my Gmail so I can reply quickly.
+            <p className="section-subtitle">
+              Send a message — it goes straight to my Gmail so I can reply quickly.
             </p>
           </div>
         </SectionReveal>
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-2">
+        <div className="contact-layout">
           <SectionReveal>
-            <div className="glass-panel-strong p-6 md:p-8">
-              <div className="mb-6 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/20">
-                  <Bot className="h-6 w-6 text-accent" />
+            <div className="contact-form-panel">
+              <div className="contact-form-heading">
+                <div className="contact-form-icon">
+                  <ArrowUpRight aria-hidden="true" className="h-6 w-6 text-accent" />
                 </div>
                 <div>
-                  <h3 className="font-display text-lg font-bold">AI Contact Panel</h3>
-                  <p className="text-xs text-[var(--text-muted)]">
-                    Delivered to {contactInfo.email} â€” you&apos;ll get a reply soon
+                  <h3 className="font-display">Let’s start a conversation</h3>
+                  <p className="text-xs leading-relaxed text-[var(--text-muted)]">
+                    Delivered to {contactInfo.email} — you&apos;ll get a reply soon
                   </p>
                 </div>
               </div>
@@ -132,6 +135,8 @@ export function Contact() {
                     <input
                       id={field.id}
                       type={field.type}
+                      name={field.id}
+                      autoComplete={field.id === "email" ? "email" : "name"}
                       required
                       value={form[field.id as keyof typeof form]}
                       onChange={(e) =>
@@ -152,6 +157,7 @@ export function Contact() {
                 <div className="relative">
                   <textarea
                     id="message"
+                    name="message"
                     required
                     rows={4}
                     value={form.message}
@@ -214,9 +220,9 @@ export function Contact() {
             </div>
           </SectionReveal>
 
-          <div className="flex flex-col gap-6">
+          <div className="contact-information flex flex-col gap-6">
             <SectionReveal delay={0.1}>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+              <div className="contact-details">
                 {[
                   {
                     icon: MapPin,
@@ -250,10 +256,10 @@ export function Contact() {
                             : undefined,
                         }
                         : {})}
-                      whileHover={{ y: -2 }}
-                      className="glass-panel flex items-start gap-4 p-5 transition-all"
+                      whileHover={reduced ? undefined : { y: -2 }}
+                      className="contact-detail group flex items-start gap-4"
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10">
+                      <div className="contact-detail-icon flex h-10 w-10 shrink-0 items-center justify-center">
                         <item.icon className="h-5 w-5 text-accent" />
                       </div>
                       <div>
@@ -274,16 +280,16 @@ export function Contact() {
 
 
             <SectionReveal delay={0.3}>
-              <div className="glass-panel p-6">
-                <h4 className="mb-4 font-display font-bold">Social Links</h4>
-                <div className="grid gap-3 sm:grid-cols-2">
+              <div className="contact-socials">
+                <h4 className="editorial-label mb-4">Social Links</h4>
+                <div className="contact-socials-grid">
                   {contactInfo.social.map((s) => (
                     <a
                       key={s.platform}
                       href={s.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-3 rounded-xl border border-transparent p-3 transition-all hover:border-accent/30 hover:bg-accent/5"
+                      className="contact-social-link group"
                     >
                       <span className="font-mono text-xs text-accent">
                         {s.platform}
@@ -291,6 +297,7 @@ export function Contact() {
                       <span className="text-sm font-medium group-hover:text-accent transition-colors">
                         @{s.handle}
                       </span>
+                      <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
                     </a>
                   ))}
                 </div>

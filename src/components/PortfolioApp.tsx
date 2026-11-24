@@ -10,9 +10,11 @@ import { PersonalData } from "@/components/sections/PersonalData";
 import { SkillsStrengths } from "@/components/sections/SkillsStrengths";
 import { Projects } from "@/components/sections/Projects";
 import { PageEntrance } from "@/components/PageEntrance";
+import { CinematicOverlay } from "@/components/effects/CinematicOverlay";
 import { usePortfolioMusic } from "@/hooks/usePortfolioMusic";
-import { MotionConfig } from "framer-motion";
+import { AnimatePresence, MotionConfig } from "framer-motion";
 import { navLinks } from "@/lib/data";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export function PortfolioApp() {
@@ -20,13 +22,41 @@ export function PortfolioApp() {
   const [activeSection, setActiveSection] = useState("home");
   const { musicPlaying, toggleMusic } = usePortfolioMusic();
   const stageRef = useRef<HTMLDivElement>(null);
-  const navigated = useRef(false);
+  const requestedSection = useRef("home");
+  const settledSection = useRef<string | null>(null);
+  const pendingFocus = useRef<string | null>(null);
   const completeLoading = useCallback(() => setLoading(false), []);
+  const chapterIndex = navLinks.findIndex((link) => link.id === activeSection);
+  const previousChapter = navLinks[(chapterIndex - 1 + navLinks.length) % navLinks.length];
+  const nextChapter = navLinks[(chapterIndex + 1) % navLinks.length];
+  const resetStage = useCallback(() => {
+    if (stageRef.current) stageRef.current.scrollTop = 0;
+  }, []);
+  const finishNavigation = useCallback((id: string) => {
+    // A newer request can arrive while the previous page is still exiting.
+    if (requestedSection.current !== id) return;
+    settledSection.current = id;
+    if (pendingFocus.current !== id) return;
+    const content = document.getElementById("portfolio-content");
+    if (content?.dataset.section === id) {
+      content.focus({ preventScroll: true });
+      pendingFocus.current = null;
+    }
+  }, []);
   const navigate = useCallback((id: string) => {
     if (!navLinks.some((link) => link.id === id)) return;
-    navigated.current = true;
+    pendingFocus.current = id;
+    if (requestedSection.current === id) {
+      if (settledSection.current === id) {
+        resetStage();
+        finishNavigation(id);
+      }
+      return;
+    }
+    requestedSection.current = id;
+    settledSection.current = null;
     setActiveSection(id);
-  }, []);
+  }, [finishNavigation, resetStage]);
 
   useEffect(() => {
     const handleNavigation = (event: Event) => {
@@ -38,19 +68,12 @@ export function PortfolioApp() {
   }, [navigate]);
 
   useEffect(() => {
-    const stage = stageRef.current;
-    if (stage) stage.scrollTop = 0;
-    if (navigated.current) {
-      document.getElementById("portfolio-content")?.focus({ preventScroll: true });
-    }
-  }, [activeSection]);
-
-  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
     document.documentElement.classList.add("fixed-portfolio");
     document.body.style.overflow = "hidden";
     return () => {
       document.documentElement.classList.remove("fixed-portfolio");
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, []);
 
@@ -67,17 +90,32 @@ export function PortfolioApp() {
       />
 
       <div className="portfolio-stage" ref={stageRef}>
-        <PageEntrance key={activeSection}>
-          <main id="portfolio-content" tabIndex={-1} className="relative z-10">
-            {activeSection === "home" && <Hero />}
-            {activeSection === "personal" && <PersonalData />}
-            {activeSection === "education" && <Education />}
-            {activeSection === "experience" && <Experience />}
-            {activeSection === "skills" && <SkillsStrengths />}
-            {activeSection === "projects" && <Projects />}
-            {activeSection === "contact" && <Contact />}
-          </main>
-        </PageEntrance>
+        <CinematicOverlay />
+        <AnimatePresence mode="wait">
+          <PageEntrance key={activeSection} onEnterStart={resetStage} onEnterComplete={() => finishNavigation(activeSection)}>
+            <main id="portfolio-content" data-section={activeSection} tabIndex={-1} className="relative z-10">
+              {activeSection === "home" && <Hero />}
+              {activeSection === "personal" && <PersonalData />}
+              {activeSection === "education" && <Education />}
+              {activeSection === "experience" && <Experience />}
+              {activeSection === "skills" && <SkillsStrengths />}
+              {activeSection === "projects" && <Projects />}
+              {activeSection === "contact" && <Contact />}
+              {activeSection !== "home" && (
+                <nav className="chapter-navigation" aria-label="Continue exploring">
+                  <button type="button" className="chapter-link" onClick={() => navigate(previousChapter.id)}>
+                    <ArrowLeft aria-hidden="true" />
+                    <span><small>Previous chapter</small><strong>{previousChapter.label}</strong></span>
+                  </button>
+                  <button type="button" className="chapter-link" onClick={() => navigate(nextChapter.id)}>
+                    <span><small>{nextChapter.id === "home" ? "Back to the beginning" : "Next chapter"}</small><strong>{nextChapter.label}</strong></span>
+                    <ArrowUpRight aria-hidden="true" />
+                  </button>
+                </nav>
+              )}
+            </main>
+          </PageEntrance>
+        </AnimatePresence>
       </div>
     </MotionConfig>
   );

@@ -2,12 +2,11 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-16">
-      <div className="mesh-bg fixed inset-0 -z-20" aria-hidden />
-      <div className="noise-overlay fixed inset-0 -z-10 opacity-[0.03]" aria-hidden />
+    <main className="not-found-scene relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-16">
+      <span className="not-found-number" aria-hidden="true">404</span>
 
       <section className="glass-panel-strong w-full max-w-2xl p-8 text-center md:p-12">
-        <p className="font-mono text-sm uppercase tracking-[0.35em] text-cyan-400">
+        <p className="font-mono text-sm uppercase tracking-[0.35em] text-accent">
           Error 404
         </p>
         <h1 className="section-title mt-4">
@@ -19,10 +18,10 @@ export default function NotFound() {
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link href="/" className="btn-primary premium-btn-glow">
+          <Link href="/" className="btn-primary">
             Return Home
           </Link>
-          <a href="/cv.pdf" className="btn-outline premium-btn-glow">
+          <a href="/cv.pdf" className="btn-outline">
             Open CV
           </a>
         </div>

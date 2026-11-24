@@ -1,7 +1,9 @@
 "use client";
 
+import { useReducedMotionPreference } from "@/hooks/useReducedMotionPreference";
+
 import { useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion } from "framer-motion";
+import { useInView } from "framer-motion";
 
 interface AnimatedCounterProps {
   end: number;
@@ -14,7 +16,7 @@ export function AnimatedCounter({
   suffix = "",
   duration = 700,
 }: AnimatedCounterProps) {
-  const reduced = useReducedMotion();
+  const reduced = useReducedMotionPreference();
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });

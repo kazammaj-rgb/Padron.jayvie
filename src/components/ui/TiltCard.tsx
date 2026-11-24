@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { usePointerMotion } from "@/hooks/usePointerMotion";
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { motion } from "framer-motion";
+import { type ReactNode } from "react";
 
 interface TiltCardProps {
   children: ReactNode;
@@ -10,11 +11,16 @@ interface TiltCardProps {
 }
 
 export function TiltCard({ children, className }: TiltCardProps) {
+  const { x, y, handlers } = usePointerMotion({ distanceX: 1.7, distanceY: -1.7 });
+
   return (
-    <motion.div
-      className={cn("group relative", className)}
-    >
-      {children}
-    </motion.div>
+    <div {...handlers} className={cn("tilt-card group relative h-full", className)}>
+      <motion.div
+        className="tilt-card-surface h-full"
+        style={{ rotateX: y, rotateY: x, transformPerspective: 1000 }}
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 }

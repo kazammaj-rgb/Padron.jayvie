@@ -1,0 +1,174 @@
+/* Native hit areas stay predictable; motion is brief and responds to intent. */
+:is(.btn-primary, .btn-outline, .sidebar-brand, .sidebar-nav-button,
+  .sidebar-utilities button, .chapter-link, .hero-explore, .image-viewer-close) {
+  transition: color var(--motion-fast), background-color var(--motion-fast),
+    border-color var(--motion-fast), box-shadow var(--motion-normal),
+    opacity var(--motion-fast), translate var(--motion-normal) var(--ease),
+    scale 220ms var(--ease);
+}
+
+:is(.chapter-link, .hero-explore, .image-viewer-close, .premium-map button) svg {
+  transition: color var(--motion-fast), transform 450ms var(--ease);
+}
+
+:is(.chapter-link, .sidebar-nav-button, .sidebar-utilities button):focus-visible {
+  color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+.btn-outline:focus-visible {
+  background-color: var(--accent-soft);
+  border-color: var(--border-hover);
+}
+
+.sidebar-brand:focus-visible .brand-monogram {
+  background-color: rgb(var(--accent-rgb) / .15);
+  border-color: var(--accent);
+}
+
+.premium-map :is(button, a):focus-visible {
+  border-color: var(--accent);
+}
+
+.premium-map button:disabled,
+.magnetic-control[aria-disabled="true"] svg {
+  transform: none !important;
+}
+
+.magnetic-control[aria-disabled="true"]::after {
+  transform: translateX(-100%) !important;
+}
+
+.social-control {
+  isolation: isolate;
+  text-decoration: none;
+  transition: border-color 300ms ease, background-color 300ms ease,
+    box-shadow 400ms ease, translate 450ms var(--ease), scale 200ms var(--ease);
+}
+
+.social-control-icon {
+  position: relative;
+  z-index: 1;
+  transition: color 300ms ease, transform 450ms var(--ease);
+}
+
+.social-control-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 100%, rgb(var(--accent-rgb) / .13), transparent 80%);
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+
+.social-control:focus-visible {
+  border-color: var(--border-hover);
+}
+
+.social-control:focus-visible .social-control-icon {
+  color: var(--accent);
+}
+
+.social-control:focus-visible .social-control-glow {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chapter-link:hover {
+    color: var(--accent);
+    border-color: var(--border-hover);
+  }
+
+  .chapter-link:hover svg {
+    transform: scale(1.1);
+  }
+
+  .hero-explore:hover svg {
+    transform: translateY(3px);
+  }
+
+  .image-viewer-close:hover svg {
+    transform: rotate(12deg);
+  }
+
+  .premium-map button:hover:not(:disabled) svg {
+    transform: scale(1.08);
+  }
+
+  .social-control:hover {
+    translate: 0 -3px;
+    border-color: var(--border-hover);
+  }
+
+  .social-control:hover .social-control-icon {
+    color: var(--accent);
+    transform: scale(1.06);
+  }
+
+  .social-control:hover .social-control-glow {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :is(.btn-primary, .btn-outline, .sidebar-brand, .sidebar-utilities button,
+    .chapter-link, .hero-explore, .image-viewer-close):active:not(:disabled):not([aria-disabled="true"]) {
+    translate: 0 0;
+    scale: .975;
+    transition-duration: 120ms;
+  }
+
+  .sidebar-nav-button:active:not(:disabled) {
+    scale: .985;
+    transition-duration: 120ms;
+  }
+
+  .social-control:active {
+    translate: 0 0;
+    scale: .97;
+    transition-duration: 120ms;
+  }
+
+  /* Transform-only light movement; grain remains still to avoid visual noise. */
+  .cinematic-light--one {
+    animation: cinematic-light-drift 24s ease-in-out infinite alternate;
+  }
+
+  .cinematic-light--two {
+    animation: cinematic-light-drift 30s ease-in-out -12s infinite alternate-reverse;
+  }
+}
+
+@keyframes cinematic-light-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-3%, 3%, 0) scale(1.04); }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .hero-explore:hover svg {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.btn-primary, .btn-outline, .sidebar-brand, .sidebar-nav-button,
+    .sidebar-utilities button, .chapter-link, .hero-explore, .image-viewer-close),
+  .social-control,
+  .social-control:hover {
+    translate: none !important;
+    scale: none !important;
+  }
+
+  :is(.btn-primary, .btn-outline, .sidebar-nav-button, .chapter-link,
+    .hero-explore, .image-viewer-close, .premium-map button) svg,
+  .premium-map :is(button, a),
+  .social-control-icon {
+    transform: none !important;
+  }
+
+  .cinematic-light {
+    animation: none;
+  }
+}

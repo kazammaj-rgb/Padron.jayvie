@@ -1,5 +1,7 @@
 "use client";
 
+import { useReducedMotionPreference } from "@/hooks/useReducedMotionPreference";
+
 import { SocialIcon, type SocialIconKey } from "@/components/ui/SocialIcons";
 import { socialLinks } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -26,53 +28,45 @@ export function SocialLinksBar({
   stagger = false,
   showLabels = false,
 }: SocialLinksBarProps) {
+  const reduced = useReducedMotionPreference();
   return (
-    <motion.div
-      data-reveal=""
-      className={cn("flex flex-wrap items-center gap-3", className)}
+    <ul
+      className={cn("m-0 flex list-none flex-wrap items-center gap-3 p-0", className)}
       role="list"
       aria-label="Social media links"
     >
       {socialLinks.map((link, i) => (
-        <motion.a
+        <motion.li
           data-reveal=""
           key={link.name}
-          href={link.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          role="listitem"
-          aria-label={`${link.name} — open profile`}
-          title={link.name}
-          initial={stagger ? { opacity: 0, scale: 0 } : false}
-          animate={stagger ? { opacity: 1, scale: 1 } : undefined}
-          transition={stagger ? { delay: 0.55 + i * 0.08, duration: 0.4 } : undefined}
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.98 }}
-          className={cn(
-            "group relative flex items-center justify-center rounded-xl glass-panel transition-all duration-300",
-            "hover:border-accent/50 focus-visible:ring-2 focus-visible:ring-accent/60",
-            sizeClasses[size],
-            showLabels && "h-auto w-auto gap-2 px-4 py-2.5"
-          )}
+          initial={stagger && !reduced ? { opacity: 0, y: 8, scale: 0.96 } : false}
+          animate={stagger ? { opacity: 1, y: 0, scale: 1 } : undefined}
+          transition={stagger ? { delay: reduced ? 0 : Math.min(i * 0.055, 0.2), duration: reduced ? 0 : 0.42, ease: [0.16, 1, 0.3, 1] } : undefined}
         >
-          <span className="text-[var(--text-muted)] transition-colors duration-300 group-hover:text-accent">
-            <SocialIcon icon={link.icon as SocialIconKey} />
-          </span>
-          {showLabels && (
-            <span className="text-sm font-medium text-[var(--text-primary)]">
-              {link.name}
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${link.name} — open profile`}
+            title={link.name}
+            className={cn(
+              "social-control group relative flex items-center justify-center rounded-xl glass-panel",
+              sizeClasses[size],
+              showLabels && "h-auto w-auto gap-2 px-4 py-2.5"
+            )}
+          >
+            <span className="social-control-icon text-[var(--text-muted)]">
+              <SocialIcon icon={link.icon as SocialIconKey} />
             </span>
-          )}
-          <span
-            className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style={{
-              background:
-                "radial-gradient(circle at 50% 50%, rgba(76,132,255,0.08), transparent 70%)",
-            }}
-            aria-hidden
-          />
-        </motion.a>
+            {showLabels && (
+              <span className="text-sm font-medium text-[var(--text-primary)]">
+                {link.name}
+              </span>
+            )}
+            <span className="social-control-glow" aria-hidden="true" />
+          </a>
+        </motion.li>
       ))}
-    </motion.div>
+    </ul>
   );
 }

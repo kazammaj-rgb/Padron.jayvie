@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { contactInfo } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -137,7 +137,7 @@ export function PremiumLocationMap() {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent/90">
-            Geo API Â· Live
+            Cauayan · Map
           </span>
         </motion.div>
         <span className="font-mono text-[10px] text-[var(--text-muted)]">
@@ -162,7 +162,7 @@ export function PremiumLocationMap() {
             transition={{ duration: 1.2, repeat: Infinity }}
             className="font-mono text-xs uppercase tracking-widest text-accent"
           >
-            {unavailable ? mapConfig.label : "Initializing map engineâ€¦"}
+            {unavailable ? mapConfig.label : "Loading map…"}
           </motion.div>
         </div>
       )}
@@ -201,7 +201,7 @@ export function PremiumLocationMap() {
         initial={false}
         transition={{ delay: 0.3 }}
         whileHover={{ y: -1 }}
-        className="absolute bottom-4 left-4 z-20 flex max-w-[calc(100%-5.5rem)] items-center gap-3 rounded-xl border border-accent/25 bg-[var(--bg-secondary)] px-4 py-3 backdrop-blur-md transition-all hover:border-accent/40 hover:shadow-neon"
+        className="absolute bottom-4 left-4 z-20 flex max-w-[calc(100%-5.5rem)] items-center gap-3 rounded-xl border border-accent/25 bg-[var(--bg-secondary)] px-4 py-3 backdrop-blur-md transition-all hover:border-accent/40 hover:shadow-glass"
       >
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/20">
           <MapPin className="h-4 w-4 text-accent" />
@@ -218,7 +218,7 @@ export function PremiumLocationMap() {
       </motion.a>
 
       <p className="pointer-events-none absolute bottom-1 right-20 z-20 font-mono text-[9px] text-[var(--text-muted)]">
-        Click map Â· navigate
+        Drag to explore
       </p>
     </div>
   );

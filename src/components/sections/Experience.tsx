@@ -1,84 +1,44 @@
 "use client";
 
 import { SectionReveal } from "@/components/ui/SectionReveal";
-import { TiltCard } from "@/components/ui/TiltCard";
 import { experience } from "@/lib/data";
-import { motion } from "framer-motion";
-import { Award, Briefcase, Building2 } from "lucide-react";
+import { ArrowUpRight, Briefcase } from "lucide-react";
 
 export function Experience() {
   return (
-    <section
-      id="experience"
-      className="relative px-4 py-24 md:px-8 md:py-32"
-    >
-      <div className="mx-auto max-w-5xl">
+    <section id="experience" className="editorial-section relative px-4 py-24 md:px-8 md:py-32">
+      <div className="mx-auto max-w-7xl">
         <SectionReveal>
-          <div className="text-center">
-            <span className="font-mono text-sm uppercase tracking-[0.3em] text-accent">
-              03 — Experience
-            </span>
-            <h2 className="section-title mt-4">
-              Work <span className="neon-text">Immersion</span>
-            </h2>
-            <p className="section-subtitle mx-auto">
-              Professional experience with futuristic timeline presentation.
-            </p>
+          <div className="section-header">
+            <span className="section-kicker font-mono text-sm uppercase tracking-[0.3em] text-accent">04 — Experience</span>
+            <h2 className="section-title mt-4">Work <span className="neon-text">Immersion</span></h2>
+            <p className="section-subtitle">Professional experience in leadership, administration, and education.</p>
           </div>
         </SectionReveal>
 
-        <div className="relative mt-16">
-          <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-accent via-accent to-transparent md:block" />
-
+        <div className="experience-list">
           {experience.map((item, index) => (
-            <SectionReveal key={item.id} delay={index * 0.15}>
-              <TiltCard>
-                <motion.div
-                  whileHover={{ y: -2 }}
-                  className="glass-panel-strong relative mx-auto max-w-2xl overflow-hidden p-8 md:p-10"
-                >
-
-                  <div className="relative z-10">
-                    <div className="mb-6 flex flex-wrap items-center gap-3">
-                      <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-4 py-1 text-xs font-mono text-accent">
-                        <Briefcase className="h-3.5 w-3.5" />
-                        {item.type}
-                      </span>
-                    </div>
-
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-accent/20 to-accent/20 ring-1 ring-accent/30">
-                        <Building2 className="h-7 w-7 text-accent" />
-                      </div>
-                      <div>
-                        <h3 className="font-display text-2xl font-bold md:text-3xl">
-                          {item.position}
-                        </h3>
-                        <p className="mt-1 text-lg text-accent">
-                          {item.institution}
-                        </p>
-                        <p className="mt-4 text-[var(--text-muted)] leading-relaxed">
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="mt-8 flex flex-wrap gap-3">
-                      {["Leadership", "Administration", "Education"].map(
-                        (tag) => (
-                          <span
-                            key={tag}
-                            className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--surface-soft)] px-3 py-1.5 text-xs font-medium"
-                          >
-                            <Award className="h-3.5 w-3.5 text-accent" />
-                            {tag}
-                          </span>
-                        )
-                      )}
-                    </div>
+            <SectionReveal key={item.id} delay={index * 0.1}>
+              <article className="experience-feature">
+                <div className="experience-index-panel">
+                  <span className="editorial-label">Experience / 0{index + 1}</span>
+                  <span className="experience-large-index" aria-hidden="true">0{index + 1}<span>.</span></span>
+                  <div className="experience-type"><Briefcase aria-hidden="true" className="h-4 w-4" />{item.type}</div>
+                </div>
+                <div className="experience-copy">
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="editorial-label">{item.institution}</span>
+                    <ArrowUpRight aria-hidden="true" className="h-5 w-5 shrink-0 text-accent" />
                   </div>
-                </motion.div>
-              </TiltCard>
+                  <h3>{item.position}</h3>
+                  <p>{item.description}</p>
+                  <div className="experience-tags">
+                    {["Leadership", "Administration", "Education"].map((tag, tagIndex) => (
+                      <span key={tag}><span aria-hidden="true">0{tagIndex + 1}</span>{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </article>
             </SectionReveal>
           ))}
         </div>

@@ -35,13 +35,13 @@ export function Navbar({ activeSection, onNavigate, musicPlaying, onToggleMusic 
         aria-label="Go to home"
       >
         <span className="brand-monogram flex shrink-0 items-center justify-center font-display text-lg font-bold">JP</span>
-        <span className="hidden text-sm font-semibold text-[var(--text-primary)] lg:block">Jayvie Padron<span className="mt-1 block text-xs font-normal text-[var(--text-muted)]">Portfolio</span></span>
+        <span className="sidebar-brand-name hidden text-sm font-semibold text-[var(--text-primary)] lg:block">Jayvie Padron<span className="mt-1 block text-xs font-normal text-[var(--text-muted)]">Developer & creative</span></span>
       </button>
 
-      <p className="mb-2 hidden px-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)] lg:block">Explore</p>
+      <p className="sidebar-explore-label mb-2 hidden px-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)] lg:block"><span>Index</span><span>01 — 07</span></p>
       <nav aria-label="Portfolio sections" className="flex-1">
         <ul className="flex flex-col gap-1">
-          {navLinks.map(({ id, label }) => {
+          {navLinks.map(({ id, label }, index) => {
             const Icon = sectionIcons[id as keyof typeof sectionIcons];
             const active = activeSection === id;
             return (
@@ -56,7 +56,8 @@ export function Navbar({ activeSection, onNavigate, musicPlaying, onToggleMusic 
                 >
                   {active && <motion.span layoutId="active-section" className="nav-active-surface" transition={{ type: "spring", stiffness: 400, damping: 35 }} aria-hidden="true" />}
                   <Icon className="h-5 w-5 shrink-0" />
-                  <span className="hidden lg:block">{label}</span>
+                  <span className="nav-label hidden lg:block">{label}</span>
+                  <span className="nav-index hidden lg:block" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                 </button>
               </li>
             );
@@ -65,6 +66,7 @@ export function Navbar({ activeSection, onNavigate, musicPlaying, onToggleMusic 
       </nav>
 
       <div className="mb-4 hidden border-t border-[var(--glass-border)] pt-4 lg:block">
+        <p className="sidebar-note-label">LET&apos;S CONNECT</p>
         <SocialLinksBar size="sm" className="sidebar-social" />
         <p className="mt-3 text-xs leading-relaxed text-[var(--text-muted)]">
           “Maybe you&apos;re not the best, but at least you&apos;re not the worst either.”
