@@ -113,7 +113,7 @@ export function Projects() {
             <h2 className="section-title mt-4">
               Featured <span className="neon-text">Work</span>
             </h2>
-            <p className="section-subtitle">Explore my deployed project.</p>
+            <p className="section-subtitle">Explore my website projects and Android applications.</p>
           </div>
         </SectionReveal>
 
